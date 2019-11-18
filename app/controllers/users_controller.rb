@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
   def index
-    render plain: 'Hello'
+
   end
+
+  def create
+    @user = User.new()
+  end
+
 end
