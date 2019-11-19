@@ -12,29 +12,15 @@
   <body>
     <header>
       <div class="container-fluid">
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-auto">
             <!-- <%= image_tag 'depacari.png', alt: 'depacari logo', width: '50' %>
             <%= link_to 'depacari', users_path, class:'navbar-brand' %> -->
 
-            <%= link_to users_path, class:'navbar-brand' do %>
+            <%= link_to users_path, class:'' do %>
               <%= image_tag 'depacari.png', alt: 'depacari logo', width: '50' %>
               depacari
             <% end %>
-          </div>
-          <div class="col-auto">
-            <%= form_with model: @user, html: {class: 'form-inline'} do |form| %>
-              <%= form.text_field :search, class: 'form-control' %>
-              <%= form.submit "search", class: 'btn btn-primary' %>
-            <% end %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-auto">
-            <%= link_to '新規登録', '/users/new' %>
-          </div>
-          <div class="col-auto">
-            <%= link_to 'ログイン', '/users/login' %>
           </div>
         </div>
       </div>  
