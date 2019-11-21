@@ -10,35 +10,8 @@
   </head>
 
   <body>
-    <header>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-auto">
-            <!-- <%= image_tag 'depacari.png', alt: 'depacari logo', width: '50' %>
-            <%= link_to 'depacari', users_path, class:'navbar-brand' %> -->
-
-            <%= link_to users_path, class:'navbar-brand' do %>
-              <%= image_tag 'depacari.png', alt: 'depacari logo', width: '50' %>
-              depacari
-            <% end %>
-          </div>
-          <div class="col-auto">
-            <%= form_with model: @user, html: {class: 'form-inline'} do |form| %>
-              <%= form.text_field :search, class: 'form-control' %>
-              <%= form.submit "search", class: 'btn btn-primary' %>
-            <% end %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-auto">
-            <%= link_to '新規登録', '/users/new' %>
-          </div>
-          <div class="col-auto">
-            <%= link_to 'ログイン', '/login' %>
-          </div>
-        </div>
-      </div>  
-    </header>
+    <%= render 'shared/header' %>
     <%= yield %>
+    <%= render 'shared/footer' %>
   </body>
 </html>
