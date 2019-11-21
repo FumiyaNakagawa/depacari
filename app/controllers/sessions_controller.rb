@@ -7,13 +7,10 @@ class SessionsController < ApplicationController
     puts params[:email]
     # ログイン処理を書いてリダイレクトする
     user = User.find_by(email: params[:email].downcase)
-    puts "start"
-    puts params
-    puts "end"
+
     if user && user.authenticate(params[:password])
-      puts 'true'
       log_in user
-      redirect_to user
+      redirect_back_or user
     else
     # エラーメッセージを作成する
     flash.now[:danger] = 'ログインに失敗しました'

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user, only: [:edit, :update]
-  before_action :corrent_user, only: [:edit, :update]
+  before_action :correct_user, only: [:edit, :update]
   
   def index
   end
@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def edit
@@ -31,7 +32,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if@user.update_attributes(user_params)
+    if@user.update_attributes(update_user_params)
       # flash[:success] = 'Profile updated'
       redirect_to @user
     else
@@ -45,6 +46,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   def user_params
+    params.require(:user).permit(:user_name, :password, :password_confirmation, :email)
+  end
+
+  def update_user_params
     params.require(:user).permit(:user_name, :password, :password_confirmation, :email)
   end
 
