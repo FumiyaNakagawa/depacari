@@ -20,7 +20,15 @@
 
     <% if logged_in? %>
     <%# ログインしていたら %>
-    
+      <h3>ログインしています</h3>
+      <div class="row">
+        <div class="col-auto">
+          <%= link_to '新規登録', '/users/new' %>
+        </div>
+        <div class="col-auto">
+          <%= link_to 'ログイン', '/login' %>
+        </div>
+      </div>
     <% else %>
     <%# ログインしていなかったら %>
       <div class="row">
