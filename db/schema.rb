@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2019_11_19_024133) do
     t.integer "evaluation_point"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
     t.string "introduction"
+    t.string "password_digest"
   end
 
 end
