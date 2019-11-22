@@ -8,7 +8,7 @@ gem 'rails', '~> 6.0.0'
 
 gem 'bcrypt', '3.1.12'
 
-gem 'will_paginate', '3.1.6'
+gem 'will_paginate', '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
 
 # Use sqlite3 as the database for Active Record
