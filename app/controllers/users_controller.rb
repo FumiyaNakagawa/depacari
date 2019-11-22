@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def update_user_params
-    params.require(:user).permit(:user_name, :email, :phone_number, :name, :address, :evaluation_point, :password, :password_confirmation)
+    params.require(:user).permit(:user_name, :email, :phone_number, :name, :address, :evaluation_point, :password, :introduction, :password_confirmation)
   end
 
   # ログイン済ユーザーかどうか確認

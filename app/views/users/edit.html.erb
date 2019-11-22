@@ -15,6 +15,10 @@
           <%= form.text_field :user_name, class: 'form-control' %>
         </div>
         <div class="form-group">
+          <label for='introduction'>紹介文</label>
+          <%= form.text_area :introduction, class: 'form-control' %>
+        </div>
+        <div class="form-group">
           <label for='email'>メールアドレス</label>
           <%= form.email_field :email, class: 'form-control' %>
         </div>
