@@ -17,6 +17,7 @@
         <strong>introduction:</strong>
         <%= @user.introduction %>
       </p>
+      <% if current_user?(@user) %>
       <p>
         <strong>email:</strong>
         <%= @user.email %>
@@ -39,6 +40,7 @@
       </p>
       <%= link_to "マイページ更新", edit_user_path(current_user) %>
     </div>
+    <% end %>
     <div class="col-2">
     <%# 調整 %>
     </div>
