@@ -1,29 +1,42 @@
-<p>
-  <strong>user_name:</strong>
-  <%= @user.user_name %>
-</p>
-
-<p>
-  <strong>email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>phone_number:</strong>
-  <%= @user.phone_number %>
-</p>
-
-<p>
-  <strong>name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>address:</strong>
-  <%= @user.address %>
-</p>
-
-<p>
-  <strong>evaluation_point:</strong>
-  <%= @user.evaluation_point %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h4 class="text-center m-4">My profile</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+    <%# 調整 %>
+    </div>
+    <div class="col-8 text-center">
+      <p>
+        <strong>user_name:</strong>
+        <%= @user.user_name %>
+      </p>
+      <p>
+        <strong>email:</strong>
+        <%= @user.email %>
+      </p>
+      <p>
+        <strong>phone_number:</strong>
+        <%= @user.phone_number %>
+      </p>
+      <p>
+        <strong>name:</strong>
+        <%= @user.name %>
+      </p>
+      <p>
+        <strong>address:</strong>
+        <%= @user.address %>
+      </p>
+      <p>
+        <strong>evaluation_point:</strong>
+        <%= @user.evaluation_point %>
+      </p>
+      <%= link_to "マイページ更新", edit_user_path(current_user) %>
+    </div>
+    <div class="col-2">
+    <%# 調整 %>
+    </div>
+  </div>
+</div>
