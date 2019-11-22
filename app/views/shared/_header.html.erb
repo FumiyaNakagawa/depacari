@@ -23,7 +23,7 @@
       <h3>ログインしています</h3>
       <div class="row">
         <div class="col-auto">
-          <%= link_to "マイページ", "/users/#{@user.id}" %>
+          <%= link_to "マイページ", 	user_path(current_user) %>
         </div>
         <div class="col-auto">
           <%= link_to "マイページ更新", edit_user_path(current_user) %>

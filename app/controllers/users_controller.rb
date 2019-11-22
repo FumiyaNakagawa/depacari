@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :correct_user, only: [:edit, :update, :show]
   
   def index
   end
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   end
 
   def update_user_params
-    params.require(:user).permit(:user_name, :password, :password_confirmation, :email)
+    params.require(:user).permit(:user_name, :email, :phone_number, :name, :address, :evaluation_point, :password, :password_confirmation)
   end
 
   # ログイン済ユーザーかどうか確認
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # 正しいユーザーかどうか確認
+  # 正しいユーザーかどうか確認\
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
