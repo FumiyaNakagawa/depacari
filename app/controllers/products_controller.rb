@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @product = current_user.products.build if logged_in_user?
   end
 
   def create

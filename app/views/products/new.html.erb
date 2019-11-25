@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <h4 class="text-center m-4">製品の登録</h4>
+      <h4 class="text-center m-4">商品の情報を入力</h4>
     </div>
   </div>
   <div class="row">
@@ -26,7 +26,7 @@
           <label for='condition'>商品の状態</label>
           <%= form.select :condition, [ '新品、未使用', '未使用に近い', '目立った傷や汚れなし', 'やや傷や汚れあり', '傷や汚れあり', '全体的に状態が悪い' ], { include_blank: '---' }, class: 'form-control' %>
         </div>
-        <%= form.submit "登録", class: 'btn btn-primary' %>
+        <%= form.submit "出品する", class: 'btn btn-primary' %>
       <% end %>
     </div>
     <div class="col-2">
