@@ -1,0 +1,11 @@
+<li id="product-<%= product.id %>">
+  <span class="user"><%= link_to product.user.name, product.user %></span>
+  <span class="name"><%= product.name %></span>
+  <span class="details"><%= product.details %></span>
+  <span class="price"><%= product.price %></span>
+  <span class="condition"><%= product.condition %></span>
+  <span class="status"><%= product.status %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(product.created_at) %> ago.
+  </span>
+</li>

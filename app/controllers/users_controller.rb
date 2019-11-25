@@ -55,15 +55,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:user_name, :email, :phone_number, :name, :address, :evaluation_point, :password, :introduction, :password_confirmation)
   end
 
-  # ログイン済ユーザーかどうか確認
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = 'ログインしてください'
-      redirect_to login_url
-    end
-  end
-
   # 正しいユーザーかどうか確認\
   def correct_user
     @user = User.find(params[:id])

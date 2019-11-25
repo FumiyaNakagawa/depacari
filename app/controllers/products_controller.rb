@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :logged_in_user, only: [:create, :destroy]
+
   def index
   end
 
@@ -6,6 +8,13 @@ class ProductsController < ApplicationController
   end
 
   def create
+    @product = current_user.product.build(product_params)
+    if @product.save
+      flash[:success] = "投稿できました"
+      redirect_to 'product/index'
+    else
+      render 'product/new'
+    end
   end
 
   def show
@@ -24,5 +33,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
+    params.require(:product).permit(:name, :details, :price, :condition, :status)
   end
 end
