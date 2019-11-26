@@ -25,7 +25,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @products = @user.products.paginate(page: params[:page])
   end
 
   def edit
@@ -40,6 +39,10 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def list
+    
   end
 
   private

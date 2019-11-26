@@ -5,21 +5,21 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = current_user.products.build if logged_in_user?
+    @product = current_user.products.build
   end
 
   def create
-    @product = current_user.product.build(product_params)
+    @product = current_user.products.build(product_params)
     if @product.save
       flash[:success] = "投稿できました"
-      redirect_to 'product/index'
+      redirect_to 'products/index'
     else
-      render 'product/new'
+      render 'products/new'
     end
   end
 
   def show
-    @products = @user.products.paginate(page: params[:page])
+    @products = current_user.products.paginate(page: params[:page])
   end
 
   def edit

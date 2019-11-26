@@ -45,13 +45,4 @@
     <%# 調整 %>
     </div>
   </div>
-  <div class="row">
-    <% if @user.products.any? %>
-      <h3>Product (<%= @user.product.count %>)</h3>
-      <ol class="products">
-        <%= render @product %>
-      </ol>
-      <%= will_paginate @product %>
-    <% end %>
-  </div>
 </div>

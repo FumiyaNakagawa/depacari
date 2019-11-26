@@ -1,11 +1,11 @@
 <div class="container-fluid">
   <div class="row">
-    <% if @user.products.any? %>
-      <h3>Product (<%= @user.product.count %>)</h3>
+    <% if current_user.products.any? %>
+      <h3>Product (<%= current_user.products.count %>)</h3>
       <ol class="products">
-        <%= render @product %>
+        <%= render partial: 'product' %>
       </ol>
-      <%= will_paginate @product %>
+      <%= will_paginate @products %>
     <% end %>
   </div>
 </div>
