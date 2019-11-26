@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :products
+    resource :profile
   end
 end
