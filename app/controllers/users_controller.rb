@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   end
 
   def list
-    
+    @products = current_user.products.paginate(page: params[:page])
   end
 
   private
