@@ -1,5 +1,5 @@
 class User::ProductsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user
 
   def index
     @products = current_user.products.paginate(page: params[:page])
