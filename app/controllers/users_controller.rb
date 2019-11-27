@@ -27,18 +27,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  def update
-    @user = User.find(params[:id])
-    if@user.update_attributes(update_user_params)
-      # flash[:success] = 'Profile updated'
-      redirect_to @user
-    else
-      render 'edit'
-    end
+  def list
+    @products = current_user.products.paginate(page: params[:page])
   end
 
   private
@@ -52,15 +42,6 @@ class UsersController < ApplicationController
 
   def update_user_params
     params.require(:user).permit(:user_name, :email, :phone_number, :name, :address, :evaluation_point, :password, :introduction, :password_confirmation)
-  end
-
-  # ログイン済ユーザーかどうか確認
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = 'ログインしてください'
-      redirect_to login_url
-    end
   end
 
   # 正しいユーザーかどうか確認\
