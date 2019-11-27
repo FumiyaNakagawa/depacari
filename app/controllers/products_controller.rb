@@ -4,23 +4,6 @@ class ProductsController < ApplicationController
   def index
   end
 
-  def new
-    @product = current_user.products.build
-  end
-
-  def create
-    @product = current_user.products.build(product_params)
-    # byebug
-    if @product.save
-      # byebug
-      flash[:success] = "投稿できました"
-      redirect_to 'products/index'
-    else
-      # byebug
-      render 'products/new'
-    end
-  end
-
   def show
     @products = current_user.products.paginate(page: params[:page])
   end
@@ -29,9 +12,5 @@ class ProductsController < ApplicationController
   private
 
   def set_products
-  end
-
-  def product_params
-    params.require(:product).permit(:name, :details, :price, :condition, :status)
   end
 end

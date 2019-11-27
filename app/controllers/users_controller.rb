@@ -27,20 +27,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  def update
-    @user = User.find(params[:id])
-    if@user.update_attributes(update_user_params)
-      # flash[:success] = 'Profile updated'
-      redirect_to @user
-    else
-      render 'edit'
-    end
-  end
-
   def list
     @products = current_user.products.paginate(page: params[:page])
   end

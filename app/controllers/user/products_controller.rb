@@ -4,21 +4,21 @@ class User::ProductsController < ApplicationController
   def index
     @products = current_user.products.paginate(page: params[:page])
   end
-
+  
   def new
     @product = current_user.products.build
   end
 
   def create
     @product = current_user.products.build(product_params)
-    # byebug
+    byebug
     if @product.save
-      # byebug
+      byebug
       flash[:success] = "投稿できました"
-      redirect_to 'products/index'
+      redirect_to user_products
     else
-      # byebug
-      render 'products/new'
+      byebug
+      render new_user_product
     end
   end
 
