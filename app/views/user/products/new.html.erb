@@ -9,7 +9,7 @@
     <%# 調整 %>
     </div>
     <div class="col-8">
-      <%= form_with(model: @product, local: true) do |form| %>
+      <%= form_with(model: @product, local: true, url: user_products_path) do |form| %>
         <div class="form-group">
           <label for='name'>商品名</label>
           <%= form.text_field :name, class: 'form-control' %>
