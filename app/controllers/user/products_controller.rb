@@ -24,10 +24,18 @@ class User::ProductsController < ApplicationController
   end
 
   def edit
-  end
-
-  def update
-  end
+    @product = current_user.products.find(params[:id])
+   end
+ 
+   def update
+     @product = current_user.products.find(params[:id])
+     if @product.update_attributes(product_params)
+       # flash[:success] = 'Profile updated'
+       redirect_to @product 
+     else
+       render edit_user_products_path
+     end
+   end
 
   def destroy
     @product = current_user.products.find(params[:id])

@@ -9,6 +9,7 @@
     <span class="timestamp">
       Posted <%= time_ago_in_words(product.created_at) %> ago.
     </span>
+    <%= link_to "edit", edit_user_product_path(product) %>
     <%= link_to "delete", user_product_path(product), method: :delete, data: {confirm: "You sure?"} %>
   </li>
 <% end %>

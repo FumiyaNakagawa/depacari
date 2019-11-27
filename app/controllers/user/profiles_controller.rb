@@ -14,7 +14,7 @@ class User::ProfilesController < ApplicationController
       # flash[:success] = 'Profile updated'
       redirect_to @user
     else
-      render 'edit'
+      render edit_user_profiles_path
     end
   end
 
