@@ -11,5 +11,9 @@
     </span>
     <%= link_to "edit", edit_user_product_path(product) %>
     <%= link_to "delete", user_product_path(product), method: :delete, data: {confirm: "You sure?"} %>
+
+
+    <%= image_tag product.picture.url if product.picture? %>
+
   </li>
 <% end %>

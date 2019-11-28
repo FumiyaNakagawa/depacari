@@ -50,6 +50,6 @@ class User::ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :details, :price, :condition, :status)
+    params.require(:product).permit(:name, :details, :price, :condition, :status, :picture)
   end
 end

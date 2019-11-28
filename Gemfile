@@ -11,7 +11,13 @@ gem 'bcrypt', '3.1.12'
 gem 'will_paginate', '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
 
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '1.2.2'
+gem 'mini_magick', '4.7.0'
+gem 'fog', '1.42'
+
+# .env から環境変数を読込
+gem 'dotenv-rails'
+
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
@@ -27,7 +33,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
+# Use Active Model has_secure_password]
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
