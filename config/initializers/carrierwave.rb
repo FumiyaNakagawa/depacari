@@ -1,5 +1,5 @@
 CarrierWave.configure do |config|
-  congig.for_credentials = {
+  config.fog_credentials = {
     provider: 'AWS',
     region: ENV['S3_REGION'],
     aws_access_key_id: ENV['S3_ACCESS_KEY'],
