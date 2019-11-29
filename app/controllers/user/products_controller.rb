@@ -7,10 +7,12 @@ class User::ProductsController < ApplicationController
 
   def new
     @product = current_user.products.build
+    @products_image = @product.products_images.build
   end
 
   def create
     @product = current_user.products.build(product_params)
+    @products_images = products.products_images.build()
     if @product.save
       flash[:success] = "投稿できました"
       redirect_to user_products_path

@@ -5,4 +5,5 @@ class Product < ApplicationRecord
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum:50 }
 
+  accepts_nested_attributes_for :products_image
 end
