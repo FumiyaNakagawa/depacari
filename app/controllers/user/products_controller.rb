@@ -7,12 +7,14 @@ class User::ProductsController < ApplicationController
 
   def new
     @product = current_user.products.build
-    @products_image = @product.products_images.build
+    @product.products_image.build
   end
 
   def create
     @product = current_user.products.build(product_params)
-    @products_images = products.products_images.build()
+    @products_images = @product.products_image.build
+    # @product.products_image.build
+    puts "products_images #{@product.products_image}"
     if @product.save
       flash[:success] = "投稿できました"
       redirect_to user_products_path
@@ -52,6 +54,6 @@ class User::ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :details, :price, :condition, :status, :picture)
+    params.require(:product).permit(:name, :details, :price, :condition, :status, products_images_attributes:(:products_image))
   end
 end

@@ -13,7 +13,7 @@
     <%= link_to "delete", user_product_path(product), method: :delete, data: {confirm: "You sure?"} %>
 
 
-    <%= image_tag product.products_image.url if product.products_image? %>
+    <%= image_tag product_products_image.url if product_products_image? %>
 
   </li>
 <% end %>
