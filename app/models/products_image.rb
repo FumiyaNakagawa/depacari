@@ -1,6 +1,6 @@
 class ProductsImage < ApplicationRecord
   belongs_to :product
-  mount_uploader :productsimage, ImageUploader
+  mount_uploader :product_image, ProductsImageUploader
   validate :image_size
 
   private
