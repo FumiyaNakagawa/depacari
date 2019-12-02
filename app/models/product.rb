@@ -1,9 +1,9 @@
 class Product < ApplicationRecord
   belongs_to :user
-  has_many :products_image
+  has_many :products_images
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum:50 }
 
-  accepts_nested_attributes_for :products_image, allow_destroy: true
+  accepts_nested_attributes_for :products_images, allow_destroy: true
 end

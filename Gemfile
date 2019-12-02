@@ -13,7 +13,7 @@ gem 'bootstrap-will_paginate', '1.0.0'
 
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'fog'
+gem "fog-aws"
 
 # .env から環境変数を読込
 gem 'dotenv-rails'

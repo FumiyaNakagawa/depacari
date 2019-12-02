@@ -6,8 +6,8 @@ class User::ProductsController < ApplicationController
   end
 
   def new
-    @product = current_user.products.build
-    @product.products_image.build
+    @product = current_user.products.new
+    @product.products_images.build
   end
 
   def create
@@ -52,6 +52,9 @@ class User::ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :details, :price, :condition, :status, work_places_attributes:[:products_image])
+    params.require(:product).permit(:name, :details, :price, :condition, 
+      :status, 
+      products_images_attributes: [:product_image]
+    )
   end
 end
