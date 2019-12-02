@@ -6,7 +6,7 @@ class User::ProductsController < ApplicationController
   end
 
   def new
-    @product = current_user.products.new
+    @product = current_user.products.build
     @product.products_images.build
   end
 
@@ -23,6 +23,7 @@ class User::ProductsController < ApplicationController
 
   def show
     @products = current_user.products.paginate(page: params[:page])
+    @image = @products.products_images()
   end
 
   def edit
