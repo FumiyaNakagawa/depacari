@@ -31,14 +31,6 @@ ActiveRecord::Schema.define(version: 2019_12_03_012852) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "products_images", force: :cascade do |t|
-    t.integer "product_id"
-    t.string "product_image"
-    t.integer "order"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "user_name"
     t.integer "phone_number"
