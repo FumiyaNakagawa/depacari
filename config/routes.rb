@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   # get '/users/:id/list', to: 'users#list'
   
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :new, :create, :show]
   resources :products, only: [:index, :show]
   # resources :users
   # resources :products

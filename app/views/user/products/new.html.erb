@@ -26,6 +26,16 @@
           <label for='condition'>商品の状態</label>
           <%= form.select :condition, [ '新品、未使用', '未使用に近い', '目立った傷や汚れなし', 'やや傷や汚れあり', '傷や汚れあり', '全体的に状態が悪い' ], { include_blank: '---' }, class: 'form-control' %>
         </div>
+
+        <span class="product_images">
+          <%= form.fields(model: :product_images) do |fields| %>
+            <%= fields.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
+            <%= fields.hidden_field :order_number %>
+          <% end %>
+        </span>
+
+
+
         <%= form.submit "出品する", class: 'btn btn-primary' %>
       <% end %>
     </div>
@@ -34,3 +44,12 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('#product_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>

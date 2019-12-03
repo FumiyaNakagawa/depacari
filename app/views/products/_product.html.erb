@@ -11,5 +11,10 @@
     </span>
     <%= link_to "edit", edit_user_product_path(product) %>
     <%= link_to "delete", user_product_path(product), method: :delete, data: {confirm: "You sure?"} %>
+
+    <% product.product_images.each do |product_image| %>
+    <%= image_tag product_image.image.url if product_image.image.url %>
+    <% end %>
+
   </li>
 <% end %>
