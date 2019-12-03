@@ -30,6 +30,7 @@
         <span class="product_images">
           <%= form.fields(model: :product_images) do |fields| %>
             <%= fields.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
+            <%= fields.hidden_field :order_number %>
           <% end %>
         </span>
 

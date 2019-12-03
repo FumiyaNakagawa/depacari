@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_03_012852) do
+ActiveRecord::Schema.define(version: 2019_12_03_065053) do
 
   create_table "product_images", force: :cascade do |t|
     t.integer "product_id"
     t.string "image"
-    t.integer "order"
+    t.integer "order_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

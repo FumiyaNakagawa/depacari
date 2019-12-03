@@ -7,12 +7,14 @@ class User::ProductsController < ApplicationController
 
   def new
     @product = current_user.products.build
-    10.times{@product.product_images.build}
+    # 10.times {@product.product_images.build}
+    10.times do |i|
+      @product.product_images.build(order_number: i)
+    end
   end
 
   def create
     @product = current_user.products.build(product_params)
-
     if @product.save
       flash[:success] = "投稿できました"
       redirect_to user_products_path
@@ -53,9 +55,6 @@ class User::ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :details, :price, :condition, 
-      :status, 
-      product_images_attributes: [:image]
-    )
+    params.require(:product).permit(:name, :details, :price, :condition, :status, product_images_attributes: [:image, :order_number] )
   end
 end
