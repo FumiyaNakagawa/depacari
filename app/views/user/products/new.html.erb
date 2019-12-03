@@ -28,8 +28,8 @@
         </div>
 
         <span class="product_images">
-          <%= form.fields(model: :products_images) do |fields| %>
-            <%= fields.file_field :product_image, accept: 'image/jpeg,image/gif,image/png' %>
+          <%= form.fields(model: :product_images) do |fields| %>
+            <%= fields.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
           <% end %>
         </span>
 

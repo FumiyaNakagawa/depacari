@@ -7,7 +7,7 @@ class User::ProductsController < ApplicationController
 
   def new
     @product = current_user.products.build
-    @product.products_images.build
+    @product.product_images.build
   end
 
   def create
@@ -23,7 +23,7 @@ class User::ProductsController < ApplicationController
 
   def show
     @products = current_user.products.paginate(page: params[:page])
-    @image = @products.products_images()
+
   end
 
   def edit
@@ -55,7 +55,7 @@ class User::ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :details, :price, :condition, 
       :status, 
-      products_images_attributes: [:product_image]
+      product_image_attributes: [:image]
     )
   end
 end
