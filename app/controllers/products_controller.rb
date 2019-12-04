@@ -2,10 +2,12 @@ class ProductsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
 
   def index
+    @products = Product.paginate(page: params[:page])
   end
 
   def show
-    @products = current_user.products.paginate(page: params[:page])
+    @product = Product.find(params[:id])
+    @images = @product.product_images
   end
 
 

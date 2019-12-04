@@ -1,2 +1,15 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.card-img-top-trim {
+  // overflow: hidden;
+  // width: 200px;
+  // height: 200px;
+  // position: relative;
+
+  width: 100%;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+
+
+}

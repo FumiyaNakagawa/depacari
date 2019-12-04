@@ -1,11 +1,41 @@
 <div class="container-fluid">
   <div class="row">
-    <% if current_user.products.any? %>
-      <h3>Product (<%= current_user.products.count %>)</h3>
-      <ol class="products">
-        <%= render partial: 'product' %>
-      </ol>
-      <%= will_paginate @products %>
-    <% end %>
+    <div class="col-8 offset-2">
+      <div class="col-12">
+        <h3 class="text-center">
+          <%= @product.name %>
+        </h3>
+      </div>
+      <div class="col-6">
+        <% @images.each do |image| %>
+          <%= image_tag image.image.url if image.image.url %>
+        <% end %>
+      </div>
+      <div class="col-6">
+        <div class="table-responsive">
+          <table class="table">
+              <tr>
+                <th scope="row">商品名</th>
+                <td><%= @product.name %></td>
+              </tr>
+              <tr>
+                <th scope="row">詳細</th>
+                <td><%= @product.details %></td>
+              </tr>
+              <tr>
+                <th scope="row">商品の状態</th>
+                <td><%= @product.condition %></td>
+              </tr>
+          </table>
+        </div>
+
+        <div class="col-12">
+          <p class="h4"><%= @product.price %>円</p>
+        </div>
+      </div>
+      <% if logged_in? %>
+        <%= link_to "購入画面に進む", product_path %>
+      <% end %>
+    </div>
   </div>
 </div>

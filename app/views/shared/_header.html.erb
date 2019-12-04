@@ -5,7 +5,7 @@
         <!-- <%= image_tag 'depacari.png', alt: 'depacari logo', width: '50' %>
         <%= link_to 'depacari', users_path, class:'navbar-brand' %> -->
 
-        <%= link_to users_path, class:'navbar-brand' do %>
+        <%= link_to products_path, class:'navbar-brand' do %>
           <%= image_tag 'depacari.png', alt: 'depacari logo', width: '50' %>
           depacari
         <% end %>
@@ -20,7 +20,6 @@
 
     <% if logged_in? %>
     <%# ログインしていたら %>
-      <h3>ログインしています</h3>
       <div class="row">
         <div class="col-auto">
           <%= link_to "出品する", new_user_product_path %>
