@@ -18,6 +18,11 @@ gem "fog-aws"
 # .env から環境変数を読込
 gem 'dotenv-rails'
 
+# Rspec
+group :development, :test do
+  gem 'rspec-rails', '~> 3.9'
+end
+
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4', group: :development
