@@ -4,7 +4,14 @@
     <% @products.each do |product| %>
       <%= link_to product, class:'' do %>
       <div class="card m-2" style="width: 16rem;">
-        <%= image_tag product.product_images.first.image.url, class: "card-img-top-trim" %>
+
+        <%= product.product_images.each do |product_image| %>
+          <% if product_image.image.url %>
+            <%= image_tag product_image.image.url, class: "card-img-top-trim" %>
+            <% break %>
+          <% end %>
+        <% end %>
+
         <div class="card-body">
           <p class="card-text">
             <%= product.name %> <%= product.price %>円
