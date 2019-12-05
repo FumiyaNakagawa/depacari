@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       render :new, layout: "no_search"
-    end
+    end｀
   end
 
   def show
