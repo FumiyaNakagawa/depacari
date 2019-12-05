@@ -25,7 +25,6 @@ class User::ProductsController < ApplicationController
 
   def show
     @products = current_user.products.paginate(page: params[:page])
-
   end
 
   def edit

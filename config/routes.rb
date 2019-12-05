@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   # resources :products
 
   namespace :user do
-    resources :products
     resource :profiles
+    resources :products
+    resources :orders
   end
 end
