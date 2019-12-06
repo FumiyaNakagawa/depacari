@@ -12,6 +12,7 @@ class User::ProfilesController < ApplicationController
     @user = User.find(current_user.id)
     if @user.update_attributes(update_user_params)
       # flash[:success] = 'Profile updated'
+      # redirect_back(fallback_location: root_path)
       redirect_to @user
     else
       render edit_user_profiles_path

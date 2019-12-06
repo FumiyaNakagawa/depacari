@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :user
+  has_one :order
+
   has_many :product_images, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
   validates :name, presence: true, length: { maximum:50 }
