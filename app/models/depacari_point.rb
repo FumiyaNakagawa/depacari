@@ -1,0 +1,2 @@
+class DepacariPoint < ApplicationRecord
+end
