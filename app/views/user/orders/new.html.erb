@@ -1,58 +1,68 @@
 <h3 class="text-center">購入内容の確認</h3><hr>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-4 offset-2">
-      <% @images.each do |image| %>
-        <%= image_tag image.image.url if image.image.url %>
-      <% end %>
+<%= form_with(model: @order, local: true, url: user_orders_path) do |form| %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-4 offset-2">
+        <% @images.each do |image| %>
+          <%= image_tag image.image.url if image.image.url %>
+        <% end %>
+      </div>
+      <div class="col-4 offser-2">
+        <h3 class="text-center"><%= @product.name %></h3>
+      </div>
+      <div class="">
+      </div>
     </div>
-    <div class="col-4 offser-2">
-      <h3 class="text-center"><%= @product.name %></h3>
+    <hr>
+    <div class="row">
+      <div class="col-8 offset-4">
+        <span class="h3">支払い金額</span>
+        <span class="h3"><%= @product.price %>円</span>
+        <p>depacariポイント:<%= current_user.depacari_point %></p>
+        <p>ポイントを使用</p>
+        <div class="form-group">
+            <%= form.number_field :use_depacari_point, class: 'form-control', pattern: '0+\.[0-9]*[1-9][0-9]*$', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57', max: "#{current_user.depacari_point}" %>
+        </div>
+      </div>
     </div>
-    <div class="">
+    <hr>
+    <div class="row">
+      <div class="col-8 offset-4">
+        <p>支払い方法</p>
+        <div class="form-group">
+            <label for='payment_method'>商品の状態</label>
+            <%= form.select :payment_method, [ 'クレジットカード' ], { include_blank: '---' }, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-8 offset-4">
+        <span class="h4">配送先</span>
+        <span><%= link_to "変更する", edit_user_profiles_path %></span>
+
+        <% if current_user.address %>
+          <p>住所：<%= current_user.address %></p>
+          <% else %>
+          <p>住所を登録してください</p>
+        <% end %>
+
+        <% if current_user.name %>
+          <p>氏名：<%= current_user.name %></p>
+          <% else %>
+          <p>氏名を登録してください</p>
+        <% end %>
+
+        <% if current_user.phone_number %>
+          <p>電話番号：<%= current_user.phone_number %></p>
+          <% else %>
+          <p>電話番号を登録してください</p>
+        <% end %>
+        <%= form.hidden_field :product_id, value: @product.id %>
+      <%= form.submit "購入する", class: 'btn btn-primary' %>
+      </div>
     </div>
   </div>
-  <hr>
-  <div class="row">
-    <div class="col-8 offset-4">
-      <span class="h3">支払い金額</span>
-      <span class="h3"><%= @product.price %>円</span>
-      <p>depacariポイント:</p>
-      <p>ポイントを使用</p>
-    </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-8 offset-4">
-      <p>支払い方法</p>
-      <p>クレジットカードのみ</p>
-    </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-8 offset-4">
-      <span class="h4">配送先</span>
-      <span><%= link_to "変更する", edit_user_profiles_path %></span>
-
-      <% if current_user.address %>
-        <p>住所：<%= current_user.address %></p>
-        <% else %>
-        <p>住所を登録してください</p>
-      <% end %>
-
-      <% if current_user.name %>
-        <p>氏名：<%= current_user.name %></p>
-        <% else %>
-        <p>氏名を登録してください</p>
-      <% end %>
-
-      <% if current_user.phone_number %>
-        <p>電話番号：<%= current_user.phone_number %></p>
-        <% else %>
-        <p>電話番号を登録してください</p>
-      <% end %>
-
-    </div>
-  </div>
-</div>
+  
+<% end %>

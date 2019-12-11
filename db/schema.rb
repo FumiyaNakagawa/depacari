@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_06_082549) do
+ActiveRecord::Schema.define(version: 2019_12_11_100016) do
 
   create_table "depacari_points", force: :cascade do |t|
     t.integer "user_id"
     t.integer "order_id"
     t.integer "point"
-    t.string "string"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "money", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "order_id"
+    t.integer "money"
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -32,12 +41,12 @@ ActiveRecord::Schema.define(version: 2019_12_06_082549) do
     t.integer "product_price"
     t.text "product_details"
     t.string "product_condition"
-    t.datetime "product_cteated_at"
+    t.datetime "product_created_at"
     t.datetime "product_updated_at"
-    t.integer "tax"
+    t.integer "margin"
     t.integer "use_depacari_point"
     t.integer "total_amont"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -56,7 +65,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_082549) do
     t.text "details"
     t.integer "price"
     t.string "condition"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

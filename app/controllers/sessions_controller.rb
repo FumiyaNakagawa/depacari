@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   def new
-    render layout: "no_search"
+    render layout: 'no_search'
   end
 
   def create
@@ -8,17 +10,17 @@ class SessionsController < ApplicationController
     # ログイン処理を書いてリダイレクトする
     user = User.find_by(email: params[:email].downcase)
 
-    if user && user.authenticate(params[:password])
+    if user&.authenticate(params[:password])
       log_in user
       redirect_back_or user
     else
-    # エラーメッセージを作成する
-    flash.now[:danger] = 'ログインに失敗しました'
-    puts 'false'
-    render :new, layout: "no_search"
+      # エラーメッセージを作成する
+      flash.now[:danger] = 'ログインに失敗しました'
+      puts 'false'
+      render :new, layout: 'no_search'
     end
   end
-  
+
   def destroy
     log_out
     redirect_to '/users'

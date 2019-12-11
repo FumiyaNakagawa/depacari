@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 class User::ProfilesController < ApplicationController
   before_action :logged_in_user
-  def index
-    
-  end
+  def index; end
 
   def edit
-   @user = User.find(current_user.id)
+    @user = User.find(current_user.id)
   end
 
   def update

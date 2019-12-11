@@ -15,6 +15,9 @@
         <div class="card-body">
           <p class="card-text">
             <%= product.name %> <%= product.price %>円
+            <% if product.status == "sold" %>
+              sold
+            <% end %>
           </p>
         </div>
       </div>
