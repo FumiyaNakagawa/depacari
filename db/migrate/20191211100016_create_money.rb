@@ -4,7 +4,7 @@ class CreateMoney < ActiveRecord::Migration[6.0]
       t.integer :user_id
       t.integer :order_id
       t.integer :money
-      t.string :status
+      t.integer :status
 
       t.timestamps
     end

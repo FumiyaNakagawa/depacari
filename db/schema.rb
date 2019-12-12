@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2019_12_11_100016) do
     t.integer "user_id"
     t.integer "order_id"
     t.integer "point"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2019_12_11_100016) do
     t.integer "user_id"
     t.integer "order_id"
     t.integer "money"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2019_12_11_100016) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
     t.string "introduction"
-    t.integer "depacari_point"
+    t.integer "depacari_point", default: 1000
   end
 
 end

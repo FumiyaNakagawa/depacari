@@ -50,27 +50,43 @@ class User::OrdersController < ApplicationController
 
   def pay(order)
     # TODO: サービスに移動する あと
-    # TODO: トランザクション張　イーナム
+    # TODO: トランザクション張　イーナム　rails transaction rescue
     # TODO: デパカリポイントの流れ
     # TODO: お金の流れ入れる
 
     # システム使用料計算
     order.margin = (order.total_amont * 0.1).floor
     order.save
-    # 購入者Dpoint計算
-    order_user = order.user
-    order_user.depacari_point -= order.use_depacari_point
-    order_user.save
+    # 購入者Dpoint計算(購入者がDpointを使用した時)
+
+    if order.use_depacari_point > 0
+      order_user = order.user
+      order_user.depacari_point -= order.use_depacari_point
+      order_user.save
+
+      # depacari_pointテーブルに書き込み
+      # status 1:購入, 2:販売, 3:換金
+      order_user_deapcari_point = DepacariPoint.new(user_id: order.user_id, order_id: order.id, point: order.use_depacari_point, status: 1)
+      order_user_deapcari_point.save
+    end
+    
 
     # 出品者Dpoint計算
     sold_user = order.sold_user
-    sold_user.depacari_point = order.total_amont - order.margin
+    sold_user.depacari_point += order.total_amont - order.margin
     sold_user.save
-
     # depacari_pointテーブルに書き込み
-    # DepacariPoint.new()
+    # status 1:購入, 2:販売, 3:換金
+    sold_user_deapcari_point = DepacariPoint.new(user_id: sold_user.id, order_id: order.id, point: (order.total_amont - order.margin), status: 2)
+    sold_user_deapcari_point.save
+    
 
     # お金の動きテーブルに書き込み
+    if order.total_amont > order.use_depacari_point
+      order_user_money = Money.new(user_id: order.user_id, order_id: order.id, money: (order.total_amont - order.use_depacari_point), status: 1)
+      order_user_money.save
+    end
+
 
     product = order.product
     product.status = 1
