@@ -27,6 +27,8 @@ end
 
 gem 'rubocop'
 
+gem 'stripe'
+
 # Use sqlite3 as the database for Active Record
 gem 'pg', group: :production
 gem 'sqlite3', '~> 1.4', group: :development

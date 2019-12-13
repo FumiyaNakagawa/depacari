@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class User::OrdersController < ApplicationController
-  def index; end
+  def index
+
+  end
 
   def new
     @product = Product.find(params[:product_id])
@@ -85,7 +87,32 @@ class User::OrdersController < ApplicationController
     if order.total_amont > order.use_depacari_point
       order_user_money = Money.new(user_id: order.user_id, order_id: order.id, money: (order.total_amont - order.use_depacari_point), status: 1)
       order_user_money.save
+
+      # stripe
+      @price = (order.total_amont - order.use_depacari_point)
+      @order_product = order.product
+
+      customer = Stripe::Customer.create({
+        email: params[:stripeEmail],
+        source: params[:stripeToken],
+      })
+
+      charge = Stripe::Charge.create({
+        customer: customer.id,
+        amount: @price,
+        description: "商品ID: #{@order_product.id} 商品名: #{@order_product.name}",
+        currency: 'jpy',
+      })
+
+      # なぜかSyntaxErroyが発生する
+      # rescue Stripe::CardError => e
+      #   flash[:error] = e.message
+      #   redirect_to new_charge_path
+
+
     end
+
+
 
 
     product = order.product

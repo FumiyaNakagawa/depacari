@@ -22,7 +22,7 @@
         <p>depacariポイント:<%= current_user.depacari_point %></p>
         <p>ポイントを使用</p>
         <div class="form-group">
-            <%= form.number_field :use_depacari_point, class: 'form-control', pattern: '0+\.[0-9]*[1-9][0-9]*$', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57', max: "#{current_user.depacari_point}" %>
+            <%= form.number_field :use_depacari_point, class: 'form-control', value: 0,pattern: '0+\.[0-9]*[1-9][0-9]*$', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57', max: "#{current_user.depacari_point}" %>
         </div>
       </div>
     </div>
@@ -60,7 +60,29 @@
           <p>電話番号を登録してください</p>
         <% end %>
         <%= form.hidden_field :product_id, value: @product.id %>
-      <%= form.submit "購入する", class: 'btn btn-primary' %>
+
+        
+        <article>
+          <% if flash[:error].present? %>
+            <div id="error_explanation">
+              <p><%= flash[:error] %></p>
+            </div>
+          <% end %>
+          <label class="amount">
+            <span>支払い合計: <%= @product.price %></span>
+          </label>
+        </article>
+        
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                data-description="クレジット決済"
+                data-name=<%= "#{@product.name}を購入" %>
+                data-description="商品名：<%= @product.name %>"
+                data-amount="<%= @product.price%>"
+                data-currency="jpy"
+                data-email=<%= "#{current_user.email}" %>
+                data-label="購入する"
+                data-locale="auto"></script>
       </div>
     </div>
   </div>
