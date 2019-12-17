@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Money < ApplicationRecord
   belongs_to :order
 

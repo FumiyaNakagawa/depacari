@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class User::OrdersController < ApplicationController
-  def index
-
-  end
+  def index; end
 
   def new
     @product = Product.find(params[:product_id])
@@ -15,13 +13,11 @@ class User::OrdersController < ApplicationController
     @product = Product.find(params[:order][:product_id])
     @order = Order.new(order_params)
     # depacariポイントが入力されなかった場合0pointにする
-    if @order.use_depacari_point == nil
-      @order.use_depacari_point = 0
-    end
-    @payment_amont =  (@product.price - @order.use_depacari_point)
+    @order.use_depacari_point = 0 if @order.use_depacari_point.nil?
+    @payment_amont = (@product.price - @order.use_depacari_point)
 
     # 支払い方法を選択していなかったら
-    if @order.payment_method == ""
+    if @order.payment_method == ''
       @images = @product.product_images
       render new_user_order_path
     end
@@ -30,21 +26,20 @@ class User::OrdersController < ApplicationController
   def create
     @product = Product.find(params[:order][:product_id])
     @order = Order.new(order_params.merge(
-      product_id: @product.id,
-      shipping_name: current_user.name,
-      user_id: current_user.id,
-      shipping_address: current_user.address,
-      sold_user_id: @product.user_id,
-      product_name: @product.name,
-      product_price: @product.price,
-      product_details: @product.details,
-      product_condition: @product.condition,
-      product_created_at: @product.created_at,
-      product_updated_at: @product.updated_at,
-      total_amont: @product.price, #現在はproduct_priceと同じ金額
-      status: 0
-      )
-    )
+                         product_id: @product.id,
+                         shipping_name: current_user.name,
+                         user_id: current_user.id,
+                         shipping_address: current_user.address,
+                         sold_user_id: @product.user_id,
+                         product_name: @product.name,
+                         product_price: @product.price,
+                         product_details: @product.details,
+                         product_condition: @product.condition,
+                         product_created_at: @product.created_at,
+                         product_updated_at: @product.updated_at,
+                         total_amont: @product.price, # 現在はproduct_priceと同じ金額
+                         status: 0
+                       ))
 
     if @order.valid?
       pay(@order)
@@ -87,7 +82,6 @@ class User::OrdersController < ApplicationController
       order_user_depacari_point = DepacariPoint.new(user_id: order.user_id, order_id: order.id, point: order.use_depacari_point, status: 1)
       order_user_depacari_point.save
     end
-    
 
     # 出品者Dpoint計算
     sold_user = order.sold_user
@@ -97,7 +91,6 @@ class User::OrdersController < ApplicationController
     # status 1:購入, 2:販売, 3:換金
     sold_user_depacari_point = DepacariPoint.new(user_id: sold_user.id, order_id: order.id, point: (order.total_amont - order.margin), status: 2)
     sold_user_depacari_point.save
-    
 
     # お金の動きテーブルに書き込み
     if order.total_amont > order.use_depacari_point
@@ -108,30 +101,25 @@ class User::OrdersController < ApplicationController
       @price = (order.total_amont - order.use_depacari_point)
       @order_product = order.product
 
-      customer = Stripe::Customer.create({
+      customer = Stripe::Customer.create(
         email: params[:stripeEmail],
-        source: params[:stripeToken],
-      })
+        source: params[:stripeToken]
+      )
 
-      charge = Stripe::Charge.create({
+      charge = Stripe::Charge.create(
         customer: customer.id,
         amount: @price,
         description: "商品ID: #{@order_product.id} 商品名: #{@order_product.name}",
-        currency: 'jpy',
-      })
+        currency: 'jpy'
+      )
 
       Rails.logger.debug charge.inspect
-    
 
     end
-
-
-
 
     product = order.product
     product.status = 1
     product.save
-
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_user_order_path(@order_product.id)

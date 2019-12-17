@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,78 +12,76 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_100016) do
-
-  create_table "depacari_points", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "order_id"
-    t.integer "point"
-    t.integer "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+ActiveRecord::Schema.define(version: 20_191_211_100_016) do
+  create_table 'depacari_points', force: :cascade do |t|
+    t.integer 'user_id'
+    t.integer 'order_id'
+    t.integer 'point'
+    t.integer 'status'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "money", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "order_id"
-    t.integer "money"
-    t.integer "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'money', force: :cascade do |t|
+    t.integer 'user_id'
+    t.integer 'order_id'
+    t.integer 'money'
+    t.integer 'status'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "product_id"
-    t.string "shipping_name"
-    t.string "shipping_address"
-    t.string "payment_method"
-    t.integer "sold_user_id"
-    t.string "product_name"
-    t.integer "product_price"
-    t.text "product_details"
-    t.string "product_condition"
-    t.datetime "product_created_at"
-    t.datetime "product_updated_at"
-    t.integer "margin"
-    t.integer "use_depacari_point"
-    t.integer "total_amont"
-    t.integer "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'orders', force: :cascade do |t|
+    t.integer 'user_id'
+    t.integer 'product_id'
+    t.string 'shipping_name'
+    t.string 'shipping_address'
+    t.string 'payment_method'
+    t.integer 'sold_user_id'
+    t.string 'product_name'
+    t.integer 'product_price'
+    t.text 'product_details'
+    t.string 'product_condition'
+    t.datetime 'product_created_at'
+    t.datetime 'product_updated_at'
+    t.integer 'margin'
+    t.integer 'use_depacari_point'
+    t.integer 'total_amont'
+    t.integer 'status'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "product_images", force: :cascade do |t|
-    t.integer "product_id"
-    t.string "image"
-    t.integer "order_number"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'product_images', force: :cascade do |t|
+    t.integer 'product_id'
+    t.string 'image'
+    t.integer 'order_number'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "products", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "name"
-    t.text "details"
-    t.integer "price"
-    t.string "condition"
-    t.integer "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'products', force: :cascade do |t|
+    t.integer 'user_id'
+    t.string 'name'
+    t.text 'details'
+    t.integer 'price'
+    t.string 'condition'
+    t.integer 'status'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "user_name"
-    t.integer "phone_number"
-    t.string "email"
-    t.string "name"
-    t.string "address"
-    t.integer "evaluation_point"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
-    t.string "introduction"
-    t.integer "depacari_point", default: 1000
+  create_table 'users', force: :cascade do |t|
+    t.string 'user_name'
+    t.integer 'phone_number'
+    t.string 'email'
+    t.string 'name'
+    t.string 'address'
+    t.integer 'evaluation_point'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'password_digest'
+    t.string 'introduction'
+    t.integer 'depacari_point', default: 1000
   end
-
 end

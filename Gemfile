@@ -29,7 +29,7 @@ gem 'rubocop'
 
 gem 'stripe'
 
-gem "jquery-rails"
+gem 'jquery-rails'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg', group: :production
