@@ -53,7 +53,7 @@ class User::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, :use_depacari_point)
+    params.require(:order).permit(:payment_method, :use_depacari_point, :product_id)
   end
 
   def pay(order)
@@ -110,11 +110,8 @@ class User::OrdersController < ApplicationController
         currency: 'jpy',
       })
 
-      # なぜかSyntaxErroyが発生する
-      # rescue Stripe::CardError => e
-      #   flash[:error] = e.message
-      #   redirect_to new_charge_path
-
+      Rails.logger.debug charge.inspect
+    
 
     end
 
@@ -124,5 +121,9 @@ class User::OrdersController < ApplicationController
     product = order.product
     product.status = 1
     product.save
+
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to new_order_path(@order_product.id)
   end
 end
