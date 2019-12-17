@@ -16,5 +16,6 @@ Rails.application.routes.draw do
     resource :profiles
     resources :products
     resources :orders
+    post '/orders/confirm', to: 'orders#confirm'
   end
 end

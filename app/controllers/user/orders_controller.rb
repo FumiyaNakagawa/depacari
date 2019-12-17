@@ -11,6 +11,12 @@ class User::OrdersController < ApplicationController
     @order = Order.new
   end
 
+  def confirm
+    @product = Product.find(params[:order][:product_id])
+    @order = Order.new(order_params)
+    @payment_amont =  (@product.price - @order.use_depacari_point)
+  end
+
   def create
     @product = Product.find(params[:order][:product_id])
     @order = Order.new(order_params.merge(

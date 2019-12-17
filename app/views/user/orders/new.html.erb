@@ -1,6 +1,6 @@
 <h3 class="text-center">購入内容の確認</h3><hr>
 
-<%= form_with(model: @order, local: true, url: user_orders_path) do |form| %>
+<%= form_with(model: @order, local: true, url: user_orders_confirm_path) do |form| %>
   <div class="container-fluid">
     <div class="row">
       <div class="col-4 offset-2">
@@ -29,9 +29,8 @@
     <hr>
     <div class="row">
       <div class="col-8 offset-4">
-        <p>支払い方法</p>
         <div class="form-group">
-            <label for='payment_method'>商品の状態</label>
+            <label for='payment_method'>支払い方法</label>
             <%= form.select :payment_method, [ 'クレジットカード' ], { include_blank: '---' }, class: 'form-control' %>
         </div>
       </div>
@@ -60,7 +59,7 @@
           <p>電話番号を登録してください</p>
         <% end %>
         <%= form.hidden_field :product_id, value: @product.id %>
-
+        <%= form.submit "購入する", class: 'btn btn-primary' %>
         
         <article>
           <% if flash[:error].present? %>
@@ -72,8 +71,8 @@
             <span>支払い合計: <%= @product.price %></span>
           </label>
         </article>
-        
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+<!--
+        <script id="stripe" src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                 data-description="クレジット決済"
                 data-name=<%= "#{@product.name}を購入" %>
@@ -83,8 +82,9 @@
                 data-email=<%= "#{current_user.email}" %>
                 data-label="購入する"
                 data-locale="auto"></script>
+                -->
       </div>
     </div>
   </div>
-  
+
 <% end %>
