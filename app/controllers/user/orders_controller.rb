@@ -14,7 +14,17 @@ class User::OrdersController < ApplicationController
   def confirm
     @product = Product.find(params[:order][:product_id])
     @order = Order.new(order_params)
+    # depacariポイントが入力されなかった場合0pointにする
+    if @order.use_depacari_point == nil
+      @order.use_depacari_point = 0
+    end
     @payment_amont =  (@product.price - @order.use_depacari_point)
+
+    # 支払い方法を選択していなかったら
+    if @order.payment_method == ""
+      @images = @product.product_images
+      render new_user_order_path
+    end
   end
 
   def create
@@ -74,8 +84,8 @@ class User::OrdersController < ApplicationController
 
       # depacari_pointテーブルに書き込み
       # status 1:購入, 2:販売, 3:換金
-      order_user_deapcari_point = DepacariPoint.new(user_id: order.user_id, order_id: order.id, point: order.use_depacari_point, status: 1)
-      order_user_deapcari_point.save
+      order_user_depacari_point = DepacariPoint.new(user_id: order.user_id, order_id: order.id, point: order.use_depacari_point, status: 1)
+      order_user_depacari_point.save
     end
     
 
@@ -85,8 +95,8 @@ class User::OrdersController < ApplicationController
     sold_user.save
     # depacari_pointテーブルに書き込み
     # status 1:購入, 2:販売, 3:換金
-    sold_user_deapcari_point = DepacariPoint.new(user_id: sold_user.id, order_id: order.id, point: (order.total_amont - order.margin), status: 2)
-    sold_user_deapcari_point.save
+    sold_user_depacari_point = DepacariPoint.new(user_id: sold_user.id, order_id: order.id, point: (order.total_amont - order.margin), status: 2)
+    sold_user_depacari_point.save
     
 
     # お金の動きテーブルに書き込み
@@ -124,6 +134,6 @@ class User::OrdersController < ApplicationController
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to new_order_path(@order_product.id)
+    redirect_to new_user_order_path(@order_product.id)
   end
 end

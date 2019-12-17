@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   namespace :user do
     resource :profiles
+    get '/profiles/edit_address', to: 'profiles#edit_address'
+
     resources :products
     resources :orders
     post '/orders/confirm', to: 'orders#confirm'

@@ -13,14 +13,13 @@
 
         <hr>
         <h4 class="text-center">配送先</h4>
-        <p>住所：<%= current_user.address %></p>
-        <p>氏名：<%= current_user.name %></p>
-        <p>電話番号：<%= current_user.phone_number %></p>
+        <h4 class="text-center">住所：<%= current_user.address %></h4>
+        <h4 class="text-center">氏名：<%= current_user.name %></h4>
 
         <%= form.hidden_field :product_id, value: @product.id %>
         <%= form.hidden_field :payment_method, value: params[:order][:payment_method] %>
         <%= form.hidden_field :use_depacari_point, value: params[:order][:use_depacari_point] %>
-        <script id="stripe" src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                 data-description="クレジット決済"
                 data-name=<%= "#{@product.name}を購入" %>
