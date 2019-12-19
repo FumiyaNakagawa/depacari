@@ -1,5 +1,3 @@
-require './app/services/base_service'
-
 class PayService < BaseService
 
   def initialize
