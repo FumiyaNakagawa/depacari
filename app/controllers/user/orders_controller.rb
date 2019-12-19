@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require './app/services/pay_service'
-
 class User::OrdersController < ApplicationController
   before_action :set_product, only: [:new, :confirm, :create, :show]
 
