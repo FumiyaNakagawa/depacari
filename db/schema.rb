@@ -10,7 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_03_065053) do
+ActiveRecord::Schema.define(version: 2019_12_18_042336) do
+
+  create_table "depacari_points", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "order_id"
+    t.integer "point"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "monay_transacrions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "order_id"
+    t.integer "money"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.string "shipping_name"
+    t.string "shipping_address"
+    t.string "payment_method"
+    t.integer "sold_user_id"
+    t.string "product_name"
+    t.integer "product_price"
+    t.text "product_details"
+    t.string "product_condition"
+    t.datetime "product_created_at"
+    t.datetime "product_updated_at"
+    t.integer "margin"
+    t.integer "use_depacari_point"
+    t.integer "total_amont"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "product_images", force: :cascade do |t|
     t.integer "product_id"
@@ -26,7 +65,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_065053) do
     t.text "details"
     t.integer "price"
     t.string "condition"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -42,6 +81,7 @@ ActiveRecord::Schema.define(version: 2019_12_03_065053) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
     t.string "introduction"
+    t.integer "depacari_point", default: 1000
   end
 
 end

@@ -5,10 +5,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-2">
-    <%# 調整 %>
-    </div>
-    <div class="col-8">
+    <div class="col-8 offset-2">
       <%= form_with(url: login_path, local: true) do |form| %>
         <div class="form-group">
           <label for='email'>メールアドレス</label>
@@ -20,9 +17,6 @@
         </div>
         <%= form.submit "ログイン", class: 'btn btn-primary' %>
       <% end %>
-    </div>
-    <div class="col-2">
-    <%# 調整 %>
     </div>
   </div>
 </div>

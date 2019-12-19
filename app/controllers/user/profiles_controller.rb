@@ -1,17 +1,22 @@
+# frozen_string_literal: true
+
 class User::ProfilesController < ApplicationController
   before_action :logged_in_user
-  def index
-    
-  end
+  def index; end
 
   def edit
-   @user = User.find(current_user.id)
+    @user = User.find(current_user.id)
+  end
+
+  def edit_address
+    @user = User.find(current_user.id)
   end
 
   def update
     @user = User.find(current_user.id)
     if @user.update_attributes(update_user_params)
       # flash[:success] = 'Profile updated'
+      # redirect_back(fallback_location: root_path)
       redirect_to @user
     else
       render edit_user_profiles_path

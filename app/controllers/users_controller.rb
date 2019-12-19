@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   # before_action :set_user, only: [:show, :edit, :update, :destroy]
   # before_action :logged_in_user, only: [:index, :edit, :update]
   # before_action :correct_user, only: [:edit, :update]
-  
+
   def index
     @users = User.paginate(page: params[:page])
   end
 
   def new
     @user = User.new
-    render layout: "no_search"
+    render layout: 'no_search'
   end
 
   def create
@@ -19,7 +21,7 @@ class UsersController < ApplicationController
       log_in @user
       redirect_to @user
     else
-      render :new, layout: "no_search"
+      render :new, layout: 'no_search'
     end
   end
 
@@ -36,6 +38,7 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
+
   def user_params
     params.require(:user).permit(:user_name, :password, :password_confirmation, :email)
   end

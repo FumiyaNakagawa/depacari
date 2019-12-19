@@ -1,0 +1,74 @@
+<h3 class="text-center">購入内容の確認</h3><hr>
+
+<%= form_with(model: @order, local: true, url: confirm_user_product_orders_path) do |form| %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-4 offset-2">
+        <% @images.each do |image| %>
+          <%= image_tag image.image.url if image.image.url %>
+        <% end %>
+      </div>
+      <div class="col-4 offser-2">
+        <h3 class="text-center"><%= @product.name %></h3>
+      </div>
+      <div class="">
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-8 offset-4">
+        <span class="h3">支払い金額</span>
+        <span class="h3"><%= @product.price %>円</span>
+        <p>depacariポイント:<%= current_user.depacari_point %></p>
+        <p>ポイントを使用</p>
+        <div class="form-group">
+            <%= form.number_field :use_depacari_point, class: 'form-control', value: 0,pattern: '0+\.[0-9]*[1-9][0-9]*$', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57', max: "#{current_user.depacari_point}" %>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-8 offset-4">
+        <div class="form-group">
+            <label for='payment_method'>支払い方法</label>
+            <%= form.select :payment_method, [ 'クレジットカード' ], { include_blank: '---' }, class: 'form-control', required:true %>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-8 offset-4">
+        <span class="h4">配送先</span>
+        <span><%= link_to "変更する", user_profiles_edit_address_path %></span>
+
+        <% if current_user.address %>
+          <p>住所：<%= current_user.address %></p>
+          <% else %>
+          <p>住所を登録してください</p>
+        <% end %>
+
+        <% if current_user.name %>
+          <p>氏名：<%= current_user.name %></p>
+          <% else %>
+          <p>氏名を登録してください</p>
+        <% end %>
+
+        <%= form.hidden_field :product_id, value: @product.id %>
+        <%= form.submit "購入する", class: 'btn btn-primary' %>
+        
+        <article>
+          <% if flash[:error].present? %>
+            <div id="error_explanation">
+              <p><%= flash[:error] %></p>
+            </div>
+          <% end %>
+          <label class="amount">
+            <span>支払い合計: <%= @product.price %></span>
+          </label>
+        </article>
+        
+      </div>
+    </div>
+  </div>
+
+<% end %>

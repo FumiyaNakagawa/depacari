@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProductImage < ApplicationRecord
   belongs_to :product
   mount_uploader :image, ProductImageUploader
@@ -6,8 +8,6 @@ class ProductImage < ApplicationRecord
   private
 
   def image_size
-    if image.size > 5.megabytes
-      errors.add(:image, "should be less than 5MB")
-    end
+    errors.add(:image, 'should be less than 5MB') if image.size > 5.megabytes
   end
 end
