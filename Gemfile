@@ -23,6 +23,7 @@ gem 'dotenv-rails'
 # Rspec
 group :development, :test do
   gem 'rspec-rails', '~> 3.9'
+  gem 'factory_bot_rails'
 end
 
 gem 'rubocop'

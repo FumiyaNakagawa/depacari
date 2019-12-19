@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe '#user' do
     # 各テストの前にUserを作成
-    let(:params) { { user_name: 'a', email: 'a@gmail.com', password: 'aaaaaa', password_confirmation: 'aaaaaa' } }
     let(:user) { User.new(params) }
+    let(:params) { { user_name: 'a', email: 'a@gmail.com', password: 'aaaaaa', password_confirmation: 'aaaaaa' } }
 
     before do
       User.create(
