@@ -5,15 +5,11 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe '#user' do
     # 各テストの前にUserを作成
-    before do
-      @user = User.new(
-        user_name: 'a',
-        email: 'a@gmail.com',
-        password: 'aaaaaa',
-        password_confirmation: 'aaaaaa'
-      )
+    let(:params) { {user_name: 'a', email: 'a@gmail.com', password: 'aaaaaa',password_confirmation: 'aaaaaa'} }
+    let(:user) { User.new(params) }
 
-      @other_user = User.create(
+    before do
+      User.create(
         user_name: 'test',
         email: 'test@example.com',
         password: 'aaaaaa',
@@ -22,79 +18,72 @@ RSpec.describe User, type: :model do
     end
 
     context 'validates check' do
-
       # 名前、メールアドレス、パスワードがあれば有効であること
       it 'is valid with a user_name, email, password, and password_confirmtion' do
-        expect(@user).to be_valid
+        expect(user).to be_valid
       end
 
       # 名前がなければ無効である事
       it 'is invalid without a user_name' do
-        @user = User.new(user_name: nil)
-        expect(@user).to be_invalid
+        user.user_name = nil
+        expect(user).to be_invalid
       end
 
       # 名前が重複している場合は無効であること
       it 'is invalid with a deplicate emaill address' do
-        @user = User.new(user_name: 'test',)
-        expect(@user).to be_invalid
+        user.user_name = 'test'
+        expect(user).to be_invalid
       end
 
       # メールアドレスがなければ無効である事
       it 'is invalid without a email' do
-        @user = User.new(email: nil)
-        expect(@user).to be_invalid
+        user.email = 'nil'
+        expect(user).to be_invalid
       end
 
       # メールアドレスが正しい形式じゃない時無効である事
       it 'is invalid when email is not in the correct format' do
-        @user = User.new(email: "a")
-        expect(@user).to be_invalid
+        user.email = 'a'
+        expect(user).to be_invalid
       end
 
       # メールアドレスが重複している場合は無効であること
       it 'is invalid with a deplicate emaill address' do
-        @user = User.new(email: 'test@example.com')
-        expect(@user).to be_invalid
-      end
-
-      # パスワードが６文字以下の場合
-      it 'is invalid when the password is 6 characters or less' do
-        @user = User.new(
-          password: 'a',
-          password_confirmation: 'a'
-        )
-        expect(@user).to be_invalid
+        user.email = 'test@example.com'
+        expect(user).to be_invalid
       end
 
 
     end
 
-    context 'password_confirmation check' do
+    context 'password check' do
+      let(:password) { 'a' }
       let(:password1) { 'aaaaaa' }
       let(:password2) { 'bbbbbb' }
+
+      # パスワードが６文字以下の場合
+      it 'is invalid when the password is 6 characters or less' do
+        user.password = password
+        user.password_confirmation = password
+        expect(user).to be_invalid
+      end
+
       it 'passwordとpassword_confirmationが一致しているときパターン１' do
-        @user = User.new(
-          password: password1,
-          password_confirmation: password1
-        )
-        expect(@user).to be_valid
+        user.password = password1
+        user.password_confirmation = password1
+        expect(user).to be_valid
       end
 
       it 'passwordとpassword_confirmationが一致しているときパターン２' do
-        @user = User.new(
-          password: password2,
-          password_confirmation: password2
-        )
-        expect(@user).to be_valid
+        user.password = password2
+        user.password_confirmation = password2
+        expect(user).to be_valid
       end
       
       it 'passwordとpassword_confirmationが一致しない時' do
-        @user = User.new(
-          password: password1,
-          password_confirmation: password2
-        )
-        expect(@user).to be_invalid
+        user.password = password1
+        user.password_confirmation = password2
+        expect(user).to be_invalid
       end
     end
 
