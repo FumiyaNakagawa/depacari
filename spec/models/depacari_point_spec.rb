@@ -3,5 +3,4 @@
 require 'rails_helper'
 
 RSpec.describe DepacariPoint, type: :model do
-
 end

@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe '#user' do
     # 各テストの前にUserを作成
-    let(:params) { {user_name: 'a', email: 'a@gmail.com', password: 'aaaaaa',password_confirmation: 'aaaaaa'} }
+    let(:params) { { user_name: 'a', email: 'a@gmail.com', password: 'aaaaaa', password_confirmation: 'aaaaaa' } }
     let(:user) { User.new(params) }
 
     before do
@@ -52,8 +52,6 @@ RSpec.describe User, type: :model do
         user.email = 'test@example.com'
         expect(user).to be_invalid
       end
-
-
     end
 
     context 'password check' do
@@ -79,13 +77,12 @@ RSpec.describe User, type: :model do
         user.password_confirmation = password2
         expect(user).to be_valid
       end
-      
+
       it 'passwordとpassword_confirmationが一致しない時' do
         user.password = password1
         user.password_confirmation = password2
         expect(user).to be_invalid
       end
     end
-
   end
 end

@@ -1,10 +1,10 @@
-class PayService < BaseService
+# frozen_string_literal: true
 
-  def initialize
-  end
+class PayService < BaseService
+  def initialize; end
 
   # private
-  
+
   def pay(order, email, source)
     # TODO: サービスに移動する あと
     # TODO: トランザクション張　イーナム　rails transaction rescue
@@ -68,5 +68,4 @@ class PayService < BaseService
     flash[:error] = e.message
     redirect_to new_user_order_path(@order_product.id)
   end
-
 end

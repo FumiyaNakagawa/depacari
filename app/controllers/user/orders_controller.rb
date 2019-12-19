@@ -1,6 +1,7 @@
 # frozen_string_literal: true
+
 class User::OrdersController < ApplicationController
-  before_action :set_product, only: [:new, :confirm, :create, :show]
+  before_action :set_product, only: %i[new confirm create show]
 
   def new
     @order = Order.new
@@ -13,9 +14,7 @@ class User::OrdersController < ApplicationController
     @payment_amont = (@product.price - @order.use_depacari_point)
 
     # 支払い方法を選択していなかったら
-    if @order.valid?
-      render new_user_product_orders_path
-    end
+    render new_user_product_orders_path if @order.valid?
   end
 
   def create
@@ -61,5 +60,4 @@ class User::OrdersController < ApplicationController
     @product = Product.find(params[:product_id])
     @images = @product.product_images
   end
-
 end
