@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
 
     # let(:user) { build(:user, user_name: 'a', email: 'a@gmail.com', password: 'aaaaaa', password_confirmation: 'aaaaaa') }
 
-    let(:user) { build(:user_a) }
+    let(:user) { build(:user) }
 
     before do
       # User.create(
@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
       #   password: 'aaaaaa',
       #   password_confirmation: 'aaaaaa'
       # )
-      create(:user)
+      create(:user, user_name: 'test', email: 'test@example.com')
     end
 
     context 'validates check' do
