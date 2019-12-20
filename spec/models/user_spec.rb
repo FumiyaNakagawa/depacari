@@ -5,22 +5,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe '#user' do
     # 各テストの前にUserを作成
-    # let(:user) { User.new(params) }
-    # let(:params) { { user_name: 'a', email: 'a@gmail.com', password: 'aaaaaa', password_confirmation: 'aaaaaa' } }
-
-    # let(:user) { build(:user, user_name: 'a', email: 'a@gmail.com', password: 'aaaaaa', password_confirmation: 'aaaaaa') }
-
     let(:user) { build(:user) }
-
-    before do
-      # User.create(
-      #   user_name: 'test',
-      #   email: 'test@example.com',
-      #   password: 'aaaaaa',
-      #   password_confirmation: 'aaaaaa'
-      # )
-      create(:user, user_name: 'test', email: 'test@example.com')
-    end
 
     context 'validates check' do
       # 名前、メールアドレス、パスワードがあれば有効であること
@@ -34,12 +19,6 @@ RSpec.describe User, type: :model do
         expect(user).to be_invalid
       end
 
-      # 名前が重複している場合は無効であること
-      it 'is invalid with a deplicate emaill address' do
-        user.user_name = 'test'
-        expect(user).to be_invalid
-      end
-
       # メールアドレスがなければ無効である事
       it 'is invalid without a email' do
         user.email = 'nil'
@@ -49,6 +28,18 @@ RSpec.describe User, type: :model do
       # メールアドレスが正しい形式じゃない時無効である事
       it 'is invalid when email is not in the correct format' do
         user.email = 'a'
+        expect(user).to be_invalid
+      end
+    end
+
+    context 'deplicate check' do
+      before do
+        create(:user, user_name: 'test', email: 'test@example.com')
+      end
+
+      # 名前が重複している場合は無効であること
+      it 'is invalid with a deplicate emaill address' do
+        user.user_name = 'test'
         expect(user).to be_invalid
       end
 
