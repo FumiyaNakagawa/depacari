@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
@@ -6,13 +8,17 @@ RSpec.describe Product, type: :model do
     let(:product) { Product.new(params) }
     let(:params) { { user_id: 1, name: '電子レンジ', price: 1000, condition: '新品、未使用' } }
 
+    # before do
+    #   User.create(
+    #     user_name: 'test',
+    #     email: 'test@example.com',
+    #     password: 'aaaaaa',
+    #     password_confirmation: 'aaaaaa'
+    #   )
+    # end
+
     before do
-      User.create(
-        user_name: 'test',
-        email: 'test@example.com',
-        password: 'aaaaaa',
-        password_confirmation: 'aaaaaa'
-      )
+      create(:user)
     end
 
     context 'validates check' do
@@ -26,8 +32,6 @@ RSpec.describe Product, type: :model do
         # user.user_name = nil
         # expect(user).to be_valid
       end
-
     end
-
   end
 end
