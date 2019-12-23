@@ -34,7 +34,11 @@
         </div>
       </div>
       <% if @product.status == "sold" %>
-        <p class="text-danger">売り切れました</p>
+        <% if current_user.id = @order.user_id || current_user.id == @product.user_id %>
+          <%= link_to "取引画面へ進む", root_path %>
+        <% else %>
+          <p class="text-danger">売り切れました</p>
+        <% end %>
       <% else %>
         <% if logged_in? %>
           <% if current_user.id == @product.user_id %>

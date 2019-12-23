@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_042336) do
+ActiveRecord::Schema.define(version: 2019_12_23_062739) do
 
   create_table "depacari_points", force: :cascade do |t|
     t.integer "user_id"
     t.integer "order_id"
     t.integer "point"
     t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "order_id"
+    t.integer "status"
+    t.integer "evaluations"
+    t.integer "point"
+    t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
