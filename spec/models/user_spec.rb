@@ -63,15 +63,9 @@ RSpec.describe User, type: :model do
         is_expected.to eq false
       end
 
-      it 'passwordとpassword_confirmationが一致しているときパターン１' do
+      it 'passwordとpassword_confirmationが一致しているときパターン' do
         user.password = password1
         user.password_confirmation = password1
-        is_expected.to eq true
-      end
-
-      it 'passwordとpassword_confirmationが一致しているときパターン２' do
-        user.password = password2
-        user.password_confirmation = password2
         is_expected.to eq true
       end
 
