@@ -6,29 +6,30 @@ RSpec.describe User, type: :model do
   describe '#user' do
     # 各テストの前にUserを作成
     let(:user) { build(:user) }
+    subject { user.valid? }
 
     context 'validates check' do
       # 名前、メールアドレス、パスワードがあれば有効であること
       it 'is valid with a user_name, email, password, and password_confirmtion' do
-        expect(user).to be_valid
+        is_expected.to eq true
       end
 
       # 名前がなければ無効である事
       it 'is invalid without a user_name' do
         user.user_name = nil
-        expect(user).to be_invalid
+        is_expected.to eq false
       end
 
       # メールアドレスがなければ無効である事
       it 'is invalid without a email' do
         user.email = 'nil'
-        expect(user).to be_invalid
+        is_expected.to eq false
       end
 
       # メールアドレスが正しい形式じゃない時無効である事
       it 'is invalid when email is not in the correct format' do
         user.email = 'a'
-        expect(user).to be_invalid
+        is_expected.to eq false
       end
     end
 
@@ -40,13 +41,13 @@ RSpec.describe User, type: :model do
       # 名前が重複している場合は無効であること
       it 'is invalid with a deplicate emaill address' do
         user.user_name = 'test'
-        expect(user).to be_invalid
+        is_expected.to eq false
       end
 
       # メールアドレスが重複している場合は無効であること
       it 'is invalid with a deplicate emaill address' do
         user.email = 'test@example.com'
-        expect(user).to be_invalid
+        is_expected.to eq false
       end
     end
 
@@ -59,25 +60,25 @@ RSpec.describe User, type: :model do
       it 'is invalid when the password is 6 characters or less' do
         user.password = password
         user.password_confirmation = password
-        expect(user).to be_invalid
+        is_expected.to eq false
       end
 
       it 'passwordとpassword_confirmationが一致しているときパターン１' do
         user.password = password1
         user.password_confirmation = password1
-        expect(user).to be_valid
+        is_expected.to eq true
       end
 
       it 'passwordとpassword_confirmationが一致しているときパターン２' do
         user.password = password2
         user.password_confirmation = password2
-        expect(user).to be_valid
+        is_expected.to eq true
       end
 
       it 'passwordとpassword_confirmationが一致しない時' do
         user.password = password1
         user.password_confirmation = password2
-        expect(user).to be_invalid
+        is_expected.to eq false
       end
     end
   end
