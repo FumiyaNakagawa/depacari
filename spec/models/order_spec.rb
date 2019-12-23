@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
-  describe '#order' do
+  describe '#valid?' do
     # 各テストの前にOrderを作成
     let(:order) { build(:order, user_id: user.id, sold_user_id: product.user_id, product_id: product.id) }
     let(:user) { create(:user) }

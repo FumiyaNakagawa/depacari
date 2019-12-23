@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  describe '#product' do
+  describe '#valid?' do
     # 各テストの前にProductを作成
     let(:product) { build(:product, user_id: user.id) }
     let(:user) { create(:user) }

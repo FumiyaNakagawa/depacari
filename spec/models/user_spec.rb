@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe '#user' do
+  describe '#valid?' do
     # 各テストの前にUserを作成
     let(:user) { build(:user) }
     subject { user.valid? }
