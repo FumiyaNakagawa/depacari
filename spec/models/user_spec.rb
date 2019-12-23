@@ -3,35 +3,77 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe '#user' do
-    it 'しっかり入力されている場合' do
-      user = User.new(user_name: 'a', email: 'a@gmail.com', password: 'aaaaaa', password_confirmation: 'aaaaaa')
-      expect(user).to be_valid
+  describe '#valid?' do
+    # 各テストの前にUserを作成
+    let(:user) { build(:user) }
+    subject { user.valid? }
+
+    context 'validates check' do
+      # 名前、メールアドレス、パスワードがあれば有効であること
+      it 'is valid with a user_name, email, password, and password_confirmtion' do
+        is_expected.to eq true
+      end
+
+      # 名前がなければ無効である事
+      it 'is invalid without a user_name' do
+        user.user_name = nil
+        is_expected.to eq false
+      end
+
+      # メールアドレスがなければ無効である事
+      it 'is invalid without a email' do
+        user.email = 'nil'
+        is_expected.to eq false
+      end
+
+      # メールアドレスが正しい形式じゃない時無効である事
+      it 'is invalid when email is not in the correct format' do
+        user.email = 'a'
+        is_expected.to eq false
+      end
     end
 
-    it 'user_nameがない場合' do
-      user = User.new(user_name: '', email: 'a@gmail.com', password: 'aaaaaa', password_confirmation: 'aaaaaa')
-      expect(user).to_not be_valid
+    context 'deplicate check' do
+      before do
+        create(:user, user_name: 'test', email: 'test@example.com')
+      end
+
+      # 名前が重複している場合は無効であること
+      it 'is invalid with a deplicate emaill address' do
+        user.user_name = 'test'
+        is_expected.to eq false
+      end
+
+      # メールアドレスが重複している場合は無効であること
+      it 'is invalid with a deplicate emaill address' do
+        user.email = 'test@example.com'
+        is_expected.to eq false
+      end
     end
 
-    it 'emailがない場合' do
-      user = User.new(user_name: 'a', email: '', password: 'aaaaaa', password_confirmation: 'aaaaaa')
-      expect(user).to_not be_valid
-    end
+    context 'password check' do
+      let(:password) { 'a' }
+      let(:password1) { 'aaaaaa' }
+      let(:password2) { 'bbbbbb' }
 
-    it 'emailが正しい形式じゃない時' do
-      user = User.new(user_name: 'a', email: 'aaaaaa', password: 'aaaaaa', password_confirmation: 'aaaaaa')
-      expect(user).to_not be_valid
-    end
+      # パスワードが６文字以下の場合
+      it 'is invalid when the password is 6 characters or less' do
+        user.password = password
+        user.password_confirmation = password
+        is_expected.to eq false
+      end
 
-    it 'passwordが６文字以下の場合' do
-      user = User.new(user_name: 'a', email: 'a@gmail.com', password: 'a', password_confirmation: 'a')
-      expect(user).to_not be_valid
-    end
+      it 'passwordとpassword_confirmationが一致しているときパターン' do
+        user.password = password1
+        user.password_confirmation = password1
+        is_expected.to eq true
+      end
 
-    it 'passwordとpassword_confirmationが一致しない時' do
-      user = User.new(user_name: 'a', email: 'a@gmail.com', password: 'aaaaaa', password_confirmation: 'bbbbbb')
-      expect(user).to_not be_valid
+      it 'passwordとpassword_confirmationが一致しない時' do
+        user.password = password1
+        user.password_confirmation = password2
+        is_expected.to eq false
+      end
     end
   end
 end

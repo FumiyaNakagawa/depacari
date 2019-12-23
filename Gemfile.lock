@@ -92,6 +92,11 @@ GEM
       railties (>= 3.2, < 6.1)
     erubi (1.9.0)
     excon (0.71.0)
+    factory_bot (5.1.1)
+      activesupport (>= 4.2.0)
+    factory_bot_rails (5.1.1)
+      factory_bot (~> 5.1.0)
+      railties (>= 4.2.0)
     ffi (1.11.3)
     fog-aws (3.5.2)
       fog-core (~> 2.1)
@@ -290,6 +295,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   carrierwave
   dotenv-rails
+  factory_bot_rails
   fog-aws
   jbuilder (~> 2.7)
   jquery-rails

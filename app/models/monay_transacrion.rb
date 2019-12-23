@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MonayTransacrion < ApplicationRecord
   belongs_to :order
 
