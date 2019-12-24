@@ -9,7 +9,7 @@ class Order < ApplicationRecord
   has_one :monay_transacrions
 
   enum payment_method: { credit_card: 1, depacari_point: 2 }
-  enum status: { waiting: 0 }
+  enum status: { waiting: 0 , shipped: 1, received: 2}
 
   validates :payment_method, presence: true
   validates :use_depacari_point, presence: true, numericality: { only_integer: true, less_than: 100000000, greater_than_or_equal_to: 0	}
