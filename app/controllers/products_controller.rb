@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @images = @product.product_images
+    @order = Order.find_by(product_id: params[:id])
   end
 
   private

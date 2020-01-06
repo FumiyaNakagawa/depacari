@@ -1,0 +1,24 @@
+<h1>取引画面</h1>
+<h3>評価ページ</h3>
+<h3>配送状況</h3>
+
+<p><%= @order.status_i18n %></p>
+
+
+<% if current_user.id == @product.user_id %>
+  <h2>出品者画面</h2>
+  <% if @order.status == 'received' %>
+    <p>受け取り評価が完了するまでお待ちください</p>
+  <% elsif @order.status == 'evaluated' %>
+    <%= render 'shared/evaluation' %>
+  <% end %>
+<% end %>
+
+
+
+<% if current_user.id == @order.user_id %>
+  <h2>購入者画面</h2>
+  <% if @order.status == 'received' %>
+    <%= render 'shared/evaluation' %>
+  <% end %>
+<% end %>

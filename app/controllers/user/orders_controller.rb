@@ -42,7 +42,7 @@ class User::OrdersController < ApplicationController
     else
       @images = @product.product_images
       # logger.info @order.errors.inspect
-      render new_user_product_orders_path
+      redirect_to new_user_product_orders_path
     end
   end
 

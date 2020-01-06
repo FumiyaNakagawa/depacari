@@ -1,0 +1,19 @@
+<p>受け取り評価をしてください</p>
+<%= form_with(model: @evaluation, local: true, url: user_product_transaction_path) do |form| %>
+
+  <%= form.radio_button :evaluation, :good %>
+  <%= form.label :evaluation, "良い", {value: :good} %>
+  <%= form.radio_button :evaluation, :normal %>
+  <%= form.label :evaluation, "普通", {value: :normal} %>
+  <%= form.radio_button :evaluation, :bad %>
+  <%= form.label :evaluation, "悪い", {value: :bad} %>
+
+
+  <label for='comment'>詳細</label>
+  <%= form.label :commentn, "評価のコメントを記入しましょう" %>
+  <%= form.text_area :comment, class: 'form-control' %>
+
+
+  
+  <%= form.submit "送信", class: 'btn btn-primary' %>
+<% end %>

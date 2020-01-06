@@ -1,0 +1,10 @@
+ja:
+  enums:
+    order:
+      status: 
+        waiting: "発送準備中"
+        shipped: "発送済み"
+        received: "受け取り完了"
+      payment_method:
+        credit_card: "クレジットカード"
+        depacari_point: "depacariポイント"
