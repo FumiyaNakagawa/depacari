@@ -11,7 +11,7 @@
   <h2>出品者画面</h2>
   <% if @order.status == 'waiting' %>
     <p>配送が完了したら発送完了ボタンを押してください</p>
-    <%= form_with(model: @order, local: true, url: user_product_shipping_path) do |form| %>
+    <%= form_with(model: @order, local: true, url: user_product_transaction_path) do |form| %>
       <%= form.radio_button :status, :shipped %>
       <%= form.label :status, "発送済み", {value: :shipped} %>
       <%= form.submit "送信", class: 'btn btn-primary' %>
@@ -31,7 +31,7 @@
     <h4>発送が完了するまでお待ちください</h4>
   <% elsif @order.status == 'shipped' %>
     <p>商品を受け取ったら受け取り完了ボタンを押してください</p>
-    <%= form_with(model: @order, local: true, url: user_product_shipping_path) do |form| %>
+    <%= form_with(model: @order, local: true, url: user_product_transaction_path) do |form| %>
       <%= form.radio_button :status, :received %>
       <%= form.label :status, "受け取り完了", {value: :received} %>
       <%= form.submit "送信", class: 'btn btn-primary' %>

@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     get '/profiles/edit_address', to: 'profiles#edit_address'
 
     resources :products do
-      resource :shipping, only: [:edit, :update]
+      resource :transaction do
+        get 'transaction'
+      end
       resource :orders do
         post 'confirm'
       end

@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2019_12_23_062739) do
   create_table "evaluations", force: :cascade do |t|
     t.integer "user_id"
     t.integer "order_id"
-    t.integer "status"
-    t.integer "evaluations"
+    t.integer "user"
+    t.integer "evaluation"
     t.integer "point"
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2019_12_23_062739) do
     t.string "email"
     t.string "name"
     t.string "address"
-    t.integer "evaluation_point"
+    t.integer "evaluation_point", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
