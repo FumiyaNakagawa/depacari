@@ -12,7 +12,8 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(params[:password])
       log_in user
-      redirect_back_or user
+      # redirect_back_or user
+      redirect_to '/products#index'
     else
       # エラーメッセージを作成する
       flash.now[:danger] = 'ログインに失敗しました'
@@ -23,6 +24,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to '/users'
+    redirect_to '/products#index'
   end
 end
