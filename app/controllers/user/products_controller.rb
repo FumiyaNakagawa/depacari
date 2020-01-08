@@ -16,7 +16,7 @@ class User::ProductsController < ApplicationController
   end
 
   def create
-    @product = current_user.products.build(product_params)
+    @product = current_user.products.build(product_params.merge(status: :waiting))
     if @product.save
       flash[:success] = '投稿できました'
       redirect_to user_products_path
