@@ -12,6 +12,10 @@ class User::ProfilesController < ApplicationController
     @user = User.find(current_user.id)
   end
 
+  def edit_password
+    @user = User.find(current_user.id)
+  end
+
   def update
     @user = User.find(current_user.id)
     if @user.update_attributes(update_user_params)

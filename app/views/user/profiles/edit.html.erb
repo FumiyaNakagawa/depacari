@@ -1,52 +1,39 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
-      <h4 class="text-center m-4">Update your profile</h4>
+    <div class="col-md-6 offset-md-3 text-center">
+      <p class="m-4 h5">プロフィールの変更</p>
+      <hr class='mt-4 mb-4'>
     </div>
   </div>
   <div class="row">
-    <div class="col-2">
-    <%# 調整 %>
-    </div>
-    <div class="col-8">
-      <%= form_with(model: @user, local: true, url: user_profiles_path) do |form| %>
-        <div class="form-group">
+    <div class="col-md-6 offset-md-3">
+      <%= form_with(model: @user, local: true, url: user_profiles_path, html: {class: 'input-group-lg'}) do |form| %>
+        <div class="form-group input-group-lg">
           <label for='user_name'>ユーザーネーム</label>
           <%= form.text_field :user_name, class: 'form-control' %>
         </div>
-        <div class="form-group">
+        <div class="form-group input-group-lg">
           <label for='introduction'>紹介文</label>
           <%= form.text_area :introduction, class: 'form-control' %>
         </div>
-        <div class="form-group">
+        <div class="form-group input-group-lg">
           <label for='email'>メールアドレス</label>
           <%= form.email_field :email, class: 'form-control' %>
         </div>
-        <div class="form-group">
+        <div class="form-group input-group-lg">
           <label for='phone_number'>電話番号</label>
           <%= form.telephone_field :phone_number, class: 'form-control' %>
         </div>
-        <div class="form-group">
+        <div class="form-group input-group-lg">
           <label for='name'>氏名</label>
           <%= form.text_field :name, class: 'form-control' %>
         </div>
-        <div class="form-group">
+        <div class="form-group input-group-lg">
           <label for='address'>住所</label>
           <%= form.text_field :address, class: 'form-control' %>
         </div>
-        <div class="form-group">
-          <label for='password'>パスワード</label>
-          <%= form.password_field :password, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <label for='password_confirmation'>パスワード確認</label>
-          <%= form.password_field :password_confirmation, class: 'form-control' %>
-        </div>
-        <%= form.submit "変更を保存する", class: 'btn btn-primary' %>
+        <%= form.submit "変更する", class: 'form-control btn btn-primary mt-4' %>
       <% end %>
-    </div>
-    <div class="col-2">
-    <%# 調整 %>
     </div>
   </div>
 </div>

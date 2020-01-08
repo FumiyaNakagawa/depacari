@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   namespace :user do
     resource :profiles
     get '/profiles/edit_address', to: 'profiles#edit_address'
+    get '/profiles/edit_password', to: 'profiles#edit_password'
 
     resources :products do
       resource :transaction do

@@ -1,3 +1,4 @@
+<!--
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
@@ -55,5 +56,62 @@
 
 
               <div class="col-4">
-                <%= link_to "ログアウト", logout_path, method: :delete %>
+                
               </div>
+
+
+
+
+-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 text-center">
+        <% if current_user?(@user) %>
+        <ul class="">
+            <li class="active nav-link"><a href="">プロフィール</a></li>
+            <li class="nav-link"><%= link_to "プロフィール変更", edit_user_profiles_path %></li>
+            <li class="nav-link"><%= link_to "パスワードの変更", user_profiles_edit_password_path %></li>
+            <li class="nav-link"><%= link_to "ログアウト", logout_path, method: :delete %></li>
+        </ul>
+        <% end %>
+    </div>
+    
+    <div class="col-md-6 text-center">
+      <p>
+        <strong>user_name:</strong>
+        <%= @user.user_name %>
+      </p>
+      <p>
+        <strong>introduction:</strong>
+        <%= @user.introduction %>
+      </p>
+
+      <% if current_user?(@user) %>
+        <p>
+          <strong>email:</strong>
+          <%= @user.email %>
+        </p>
+        <p>
+          <strong>phone_number:</strong>
+          <%= @user.phone_number %>
+        </p>
+        <p>
+          <strong>name:</strong>
+          <%= @user.name %>
+        </p>
+        <p>
+          <strong>address:</strong>
+          <%= @user.address %>
+        </p>
+        <p>
+          <strong>evaluation_point:</strong>
+          <%= @user.evaluation_point %>
+        </p>
+        <p>
+          <strong>depacari_point:</strong>
+          <%= @user.depacari_point %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
