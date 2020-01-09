@@ -9,7 +9,7 @@
   <h2>出品者画面</h2>
   <% if @order.status == 'received' %>
     <p>受け取り評価が完了するまでお待ちください</p>
-  <% elsif @order.status == 'evaluated' %>
+  <% elsif @order.status == 'bought_user_evaluated' %>
     <%= render 'shared/evaluation' %>
   <% end %>
 <% end %>

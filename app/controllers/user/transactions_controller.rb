@@ -6,21 +6,16 @@ class User::TransactionsController < ApplicationController
   end
 
   def create
-    # @evaluation = Evaluation.new(evaluation_params.merge(user_id: current_user.id))
-
+    evaluation_service = EvaluationService.new
     if current_user.id == @order.user_id # もし購入者だったら
       # 出品者を評価して状態を購入者評価済みにする
-      Evaluation.evaluation_bought_user!(evaluation_params, current_user, @order)
+      evaluation_service.evaluation_bought_user!(evaluation_params, current_user, @order)
 
     elsif current_user.id == @product.user_id # もし出品者だったら
       # 購入者を評価して
-      Evaluation.evaluation_sold_user!(evaluation_params, current_user, @order)
-      # 購入者と出品者の評価ポイントを加算する
-      Evaluation.evaluation_point(@order.id)
+      evaluation_service.evaluation_sold_user!(evaluation_params, current_user, @order)
 
     end
-
-    # Evaluation.evaluation(@evaluation, @order)
 
     redirect_to new_user_product_transaction_path
   end
