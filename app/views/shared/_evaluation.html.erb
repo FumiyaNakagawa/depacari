@@ -1,19 +1,34 @@
-<p>受け取り評価をしてください</p>
 <%= form_with(model: @evaluation, local: true, url: user_product_transaction_path) do |form| %>
 
-  <%= form.radio_button :evaluation, :good %>
-  <%= form.label :evaluation, "良い", {value: :good} %>
-  <%= form.radio_button :evaluation, :normal %>
-  <%= form.label :evaluation, "普通", {value: :normal} %>
-  <%= form.radio_button :evaluation, :bad %>
-  <%= form.label :evaluation, "悪い", {value: :bad} %>
+  <div class="form-group input-group-lg">
 
+    <%= form.label :evaluation, {value: :good}, class: 'p-3' do %>
+      <i class="fas fa-grin h2 text-danger"></i>
+      <p class="m-0 h4">良い</p> 
+      <%= form.radio_button :evaluation, :good, required:true %>
+    <% end %>
 
-  <label for='comment'>詳細</label>
-  <%= form.label :commentn, "評価のコメントを記入しましょう" %>
-  <%= form.text_area :comment, class: 'form-control' %>
+    <%= form.label :evaluation, {value: :normal}, class: 'p-3' do %>
+      <i class="fas fa-meh h2 text-warning"></i>
+      <p class="m-0 h4">普通</p> 
+      <%= form.radio_button :evaluation, :normal, required:true %>
+    <% end %>
 
+    <%= form.label :evaluation, {value: :bad}, class: 'p-3' do %>
+      <i class="fas fa-frown h2 text-info"></i>
+      <p class="m-0 h4">悪い</p> 
+      <%= form.radio_button :evaluation, :bad, required:true %>
+    <% end %>
 
-  
-  <%= form.submit "送信", class: 'btn btn-primary' %>
+  </div>
+
+  <div class="form-group input-group-lg">
+    <label for='comment'>詳細</label>
+    <%= form.label :commentn, "評価のコメントを記入しましょう" %>
+    <%= form.text_area :comment, class: 'form-control' %>
+  </div>
+
+  <div class="form-group input-group-lg">
+    <%= form.submit "送信", class: 'btn btn-primary form-control w-50' %>
+  </div>
 <% end %>

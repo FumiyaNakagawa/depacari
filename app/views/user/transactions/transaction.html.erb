@@ -1,42 +1,26 @@
-<h1>取引画面</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="row">
 
-<h3>配送状況</h3>
+        <div class="col-12 mb-3">
+          <h3 class="text-center">取引画面</h3>
+          <hr>
+          <p class="text-center h5">取引状況：<%= @order.status_i18n %></p>
+          <hr>
+        </div>
 
-<p><%= @order.status_i18n %></p>
+        <div class="col-12 text-center h5">
+          <% if current_user.id == @product.user_id %>
+            <%# 出品者画面 %>
+            <%= render 'shared/sold_user_transaction' %>
+          <% else current_user.id == @order.user_id %>
+            <%# 購入者画面 %>
+            <%= render 'shared/bought_user_transaction' %>
+          <% end %>
+        </div>
 
-
-
-
-<%# if current_user.id == @product.user_id %>
-  <h2>出品者画面</h2>
-  <% if @order.status == 'waiting' %>
-    <p>配送が完了したら発送完了ボタンを押してください</p>
-    <%= form_with(model: @order, local: true, url: user_product_transaction_path) do |form| %>
-      <%= form.radio_button :status, :shipped %>
-      <%= form.label :status, "発送済み", {value: :shipped} %>
-      <%= form.submit "送信", class: 'btn btn-primary' %>
-    <% end %>
-  <% elsif @order.status == 'shipped' %>
-    <h4>受け取りが完了するまでお待ちください</h4>
-  <% elsif @order.status == 'received' %>
-    <h4>購入者が受け取り評価するまでお待ちください</h4>
-  <% end %>
-<%# end %>
-
-
-
-<% if current_user.id == @order.user_id %>
-  <h2>購入者画面</h2>
-  <% if @order.status == 'waiting' %>
-    <h4>発送が完了するまでお待ちください</h4>
-  <% elsif @order.status == 'shipped' %>
-    <p>商品を受け取ったら受け取り完了ボタンを押してください</p>
-    <%= form_with(model: @order, local: true, url: user_product_transaction_path) do |form| %>
-      <%= form.radio_button :status, :received %>
-      <%= form.label :status, "受け取り完了", {value: :received} %>
-      <%= form.submit "送信", class: 'btn btn-primary' %>
-    <% end %>
-  <% elsif @order.status == 'received' %>
-    <h4>受け取り評価をしてください</h4>
-  <% end %>
-<% end %>
+      </div>
+    </div>
+  </div>
+</div>

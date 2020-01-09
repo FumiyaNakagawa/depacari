@@ -5,6 +5,8 @@ ja:
         waiting: "発送準備中"
         shipped: "発送済み"
         received: "受け取り完了"
+        bought_user_evaluated: "購入者の評価が完了しました"
+        finished: "取引が完了しました"
       payment_method:
         credit_card: "クレジットカード"
         depacari_point: "depacariポイント"

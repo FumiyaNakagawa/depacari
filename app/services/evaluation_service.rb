@@ -8,7 +8,7 @@ class EvaluationService < BaseService
     end
 
     evaluation = Evaluation.new(evaluation_params.merge(user_id: current_user.id, order_id: order.id, user: :bought_user))
-    evaluation.point = Evaluation.point(evaluation.evaluation)
+    evaluation.point = point(evaluation.evaluation)
 
     order.status = :bought_user_evaluated
 
@@ -26,7 +26,7 @@ class EvaluationService < BaseService
     end
 
     evaluation = Evaluation.new(evaluation_params.merge(user_id: current_user.id, order_id: order.id, user: :sold_user))
-    evaluation.point = Evaluation.point(evaluation.evaluation)
+    evaluation.point = point(evaluation.evaluation)
 
     order.status = :finished
 
