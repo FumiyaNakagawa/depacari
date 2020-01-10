@@ -1,28 +1,47 @@
 <h3 class="text-center">出品中の商品</h3>
+
 <div class="container-fluid">
   <div class="row">
-    <% @products.each do |product| %>
-      <%= link_to product, class:'' do %>
-      <div class="card m-2" style="width: 16rem;">
 
-        <%= product.product_images.each do |product_image| %>
-          <% if product_image.image.url %>
-            <%= image_tag product_image.image.url, class: "card-img-top-trim" %>
-            <% break %>
-          <% end %>
+        
+    <div class="col-md-10 offset-md-1">
+      <div class="row">
+
+        <% @products.each do |product| %>
+          
+            <div class="col-4 col-md-3 mb-3">
+            <%= link_to product, class:'' do %>
+              <div class="card">
+
+                <%= product.product_images.each_with_index do |product_image, i| %>
+                  <% if product_image.image.url %>
+                    <%= image_tag product_image.image.url, class: "card-img-top-trim" %>
+                    <% break %>
+                  <% end %>
+                  <% if i == product.product_images.length - 1 %>
+                    <%= image_tag 'no_image.png', class: "card-img-top-trim" %>
+                    <% break %>
+                  <% end %>
+                <% end %>
+
+                <div class="card-body">
+                  <p class="card-text  text-dark">
+                    <%= product.name %> <%= product.price %>円
+                    <% if product.status == "sold" %>
+                      sold
+                    <% end %>
+                  </p>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          
         <% end %>
 
-        <div class="card-body">
-          <p class="card-text">
-            <%= product.name %> <%= product.price %>円
-            <% if product.status == "sold" %>
-              sold
-            <% end %>
-          </p>
-        </div>
       </div>
-      <% end %>
-    <% end %>
+    </div>
+
+
   </div>
 </div>
 

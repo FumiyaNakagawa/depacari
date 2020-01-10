@@ -25,7 +25,7 @@ User.create(
 )
 
 
-4.times do |i|
+50.times do |i|
   Product.create(
     id: i,
     user_id: 2,
