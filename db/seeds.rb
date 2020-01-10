@@ -9,36 +9,28 @@
 
 
 User.create(
-  user_name: "a",
-  email: "a@gmail.com",
-  name: "中川くん",
+  user_name: "depacari",
+  email: "depacari@example.com",
+  name: "デパカリ太郎",
   address: "東京都",
   password: 'aaaaaa'
 )
 
-User.create(
-  user_name: "b",
-  email: "b@gmail.com",
-  name: "中川くん",
-  address: "東京都",
-  password: 'bbbbbb'
-)
 
 
-50.times do |i|
-  Product.create(
-    id: i,
-    user_id: 2,
-    name: "オーブントースター",
-    details: "",
+30.times do |i|
+  p = Product.create(
+    user_id: 1,
+    name: "ご飯",
+    details: "美味しいご飯です",
     price: 1000,
     condition: "新品、未使用",
     status: "waiting"
   )
 
   ProductImage.create(
-    product_id: i,
-    image:  open("./app/assets/images/no_image.png"),
+    product_id: p.id,
+    image:  open("./app/assets/images/rice.png"),
     order_number: 1
   )
 end
