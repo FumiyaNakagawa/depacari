@@ -9,6 +9,7 @@ class User::ProfilesController < ApplicationController
   end
 
   def edit_address
+    # http://localhost:3000/user/profiles/edit_address?next_url=/user/products/28/orders/new
     @user = User.find(current_user.id)
   end
 
@@ -20,8 +21,8 @@ class User::ProfilesController < ApplicationController
     @user = User.find(current_user.id)
     if @user.update_attributes(update_user_params)
       # flash[:success] = 'Profile updated'
-      # redirect_back(fallback_location: root_path)
-      redirect_to @user
+      redirect_back(fallback_location: root_path)
+      # redirect_to @user
     else
       render edit_user_profiles_path
     end

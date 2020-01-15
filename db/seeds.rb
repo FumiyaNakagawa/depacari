@@ -8,7 +8,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create(
+u = User.create(
   user_name: "depacari",
   email: "depacari@example.com",
   name: "デパカリ太郎",
@@ -20,7 +20,7 @@ User.create(
 
 30.times do |i|
   p = Product.create(
-    user_id: 1,
+    user_id: u.id,
     name: "ご飯",
     details: "美味しいご飯です",
     price: 1000,
