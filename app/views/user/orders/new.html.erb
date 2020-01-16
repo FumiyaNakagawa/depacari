@@ -98,7 +98,7 @@
             </div>
           <% else %>
             <div class="form-group input-group-lg">
-              <%= link_to "配送先を登録する", user_profiles_edit_address_path, class: 'btn btn-success form-control mt-2' %>
+              <%= link_to "配送先を登録する", user_profiles_edit_address_path(product_id: @product.id), class: 'btn btn-success form-control mt-2' %>
             </div>
           <% end %>
         </div>
@@ -118,9 +118,9 @@
     console.log(select_num);
     if (select_num == 2) {
       target.value = <%= @product.price %>
-      target.disabled = true
+      target.readOnly = true
     } else {
-      target.disabled = false
+      target.readOnly = false
     }
 
   }

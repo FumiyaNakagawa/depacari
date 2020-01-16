@@ -8,19 +8,24 @@ class User::ProfilesController < ApplicationController
   end
 
   def edit_address
-    # http://localhost:3000/user/profiles/edit_address?next_url=/user/products/28/orders/new
-
   end
 
   def edit_password
   end
 
   def update
-
     if @user.update_attributes(update_user_params)
       # flash[:success] = 'Profile updated'
-      redirect_back(fallback_location: root_path)
-      # redirect_to @user
+      # redirect_back(fallback_location: root_path)
+
+      # params[:next_url] ? redirect_to params[:next_url] : redirect_to @user
+      if params[:next_url]
+        redirect_to params[:next_url]
+      else
+        redirect_to @user
+      end
+
+      # redirect_to params[:next_url]
     else
       render edit_user_profiles_path
     end
