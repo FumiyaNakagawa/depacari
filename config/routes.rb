@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       end
       resource :orders do
         post 'confirm'
+        get 'confirm', to: 'reload_confirm'
       end
     end
   end

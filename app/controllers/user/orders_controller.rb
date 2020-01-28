@@ -7,6 +7,10 @@ class User::OrdersController < ApplicationController
     @order = Order.new
   end
 
+  def reload_confirm
+    redirect_to action: :new
+  end
+
   def confirm
     @order = Order.new(order_params)
     # depacariポイントが入力されなかった場合0pointにする

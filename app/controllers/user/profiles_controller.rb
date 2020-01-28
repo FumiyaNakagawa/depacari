@@ -18,12 +18,7 @@ class User::ProfilesController < ApplicationController
       # flash[:success] = 'Profile updated'
       # redirect_back(fallback_location: root_path)
 
-      # params[:next_url] ? redirect_to params[:next_url] : redirect_to @user
-      if params[:next_url]
-        redirect_to params[:next_url]
-      else
-        redirect_to @user
-      end
+      redirect_to params[:next_url].presence || user_path(@user)
 
       # redirect_to params[:next_url]
     else
