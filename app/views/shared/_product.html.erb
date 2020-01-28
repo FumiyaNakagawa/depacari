@@ -54,7 +54,7 @@
             </tr>
             <tr>
               <th scope="row">値段</th>
-              <td>￥<%= product.price %></td>
+              <td>￥<%= product.price.to_s(:delimited) %></td>
             </tr>
             <tr>
               <th scope="row">販売状況</th>

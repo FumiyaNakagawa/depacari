@@ -50,8 +50,8 @@
       <div class="row">
         <div class="col-12">
           <span class="h3">支払い金額</span>
-          <span class="h3"><%= @product.price %>円</span>
-          <p class='h5 mt-3 mb-3'>使用可能depacariポイント:<%= current_user.depacari_point %>dp</p>
+          <span class="h3"><%= @product.price.to_s(:delimited) %>円</span>
+          <p class='h5 mt-3 mb-3'>使用可能depacariポイント:<%= current_user.depacari_point.to_s(:delimited) %>dp</p>
 
           <div class="form-group input-group-lg">
             <% if @product.price <= current_user.depacari_point %>

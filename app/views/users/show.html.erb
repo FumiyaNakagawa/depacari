@@ -44,7 +44,7 @@
         </p>
         <p>
           <strong>depacari_point:</strong>
-          <%= @user.depacari_point %>
+          <%= @user.depacari_point.to_s(:delimited) %>
         </p>
       <% end %>
     </div>
