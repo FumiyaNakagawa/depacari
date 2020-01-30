@@ -12,7 +12,7 @@
             <div class="col-4 col-md-3 mb-3">
             <%= link_to product, class:'' do %>
               <div class="card">
-
+        
                 <%= product.product_images.each_with_index do |product_image, i| %>
                   <% if product_image.image.url %>
                     <%= image_tag product_image.image.url, class: "card-img-top-trim" %>
