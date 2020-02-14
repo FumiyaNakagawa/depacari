@@ -4,7 +4,7 @@ class User::ProductsController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @products = current_user.products.paginate(page: params[:page])
+    @products = current_user.products.paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -16,9 +16,8 @@ class User::ProductsController < ApplicationController
   end
 
   def create
-    @product = current_user.products.build(product_params)
+    @product = current_user.products.build(product_params.merge(status: :waiting))
     if @product.save
-      flash[:success] = '投稿できました'
       redirect_to user_products_path
     else
       render new_user_product_path

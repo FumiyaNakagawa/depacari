@@ -18,6 +18,8 @@
           <label for='address'>住所</label>
           <%= form.text_field :address, class: 'form-control' %>
         </div>
+
+        <%= hidden_field_tag :next_url, "/user/products/#{params[:product_id]}/orders/new" %>
         <%= form.submit "変更を保存する", class: 'btn btn-primary' %>
       <% end %>
     </div>

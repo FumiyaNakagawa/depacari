@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'users#new'
+  root 'products#index'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
@@ -15,14 +15,15 @@ Rails.application.routes.draw do
   namespace :user do
     resource :profiles
     get '/profiles/edit_address', to: 'profiles#edit_address'
-
-    # resources :products
-    # resources :orders
-    # post '/orders/confirm', to: 'orders#confirm'
+    get '/profiles/edit_password', to: 'profiles#edit_password'
 
     resources :products do
+      resource :transaction do
+        get 'transaction'
+      end
       resource :orders do
         post 'confirm'
+        get 'confirm', to: 'orders#reload_confirm'
       end
     end
   end

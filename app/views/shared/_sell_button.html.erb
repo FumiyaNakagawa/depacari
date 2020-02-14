@@ -1,0 +1,16 @@
+  <%# 出品ボタン %>
+  <% if logged_in? %> 
+    <%= link_to new_user_product_path, class: 'd-none d-md-block' do %>
+      <div class='sell-p bg-danger'>
+        <p class='text-white mt-3 h4'>出品</p>
+        <i class="fas fa-camera camera-p"></i>
+      </div>
+    <% end %>
+
+    <%= link_to new_user_product_path, class: 'd-md-none' do %>
+      <div class='sell-s bg-danger'>
+        <p class='text-white mt-3 h6'>出品</p>
+        <i class="fas fa-camera camera-s"></i>
+      </div>
+    <% end %>
+<% end %>

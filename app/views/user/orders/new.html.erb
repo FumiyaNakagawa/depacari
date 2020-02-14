@@ -1,74 +1,134 @@
 <h3 class="text-center">購入内容の確認</h3><hr>
 
-<%= form_with(model: @order, local: true, url: confirm_user_product_orders_path) do |form| %>
-  <div class="container-fluid">
+<div class="container-fluid">
+  <div class="col-md-8 offset-md-2">
     <div class="row">
-      <div class="col-4 offset-2">
-        <% @images.each do |image| %>
-          <%= image_tag image.image.url if image.image.url %>
-        <% end %>
+      <div class="col-md-6">
+        <!-- カルーセル部分  -->
+        <div id="carousel1" class="carousel slide" data-interval=0 data-ride="carousel">
+          <ol class="carousel-indicators">
+            <% @images.each_with_index do |image, i| %>
+              <% if i == 0 && image.image.url %>
+                <li data-target="#carousel1" data-slide-to=i class="active"></li>
+              <% elsif image.image.url %>
+                <li data-target="#carousel1" data-slide-to=i></li>
+              <% end %>
+            <% end %>
+          </ol>
+          <div class="carousel-inner" role="listbox">
+            <% @images.each_with_index do |image, i| %>
+              <% if i == 0 && image.image.url %>
+                <div class="carousel-item active">
+                  <%= image_tag image.image.url, class: 'd-block w-100' if image.image.url %>
+                </div>
+              <% elsif image.image.url %>
+                <div class="carousel-item">
+                  <%= image_tag image.image.url, class: 'd-block w-100' if image.image.url %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <a class="carousel-control-prev" href="#carousel1" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon p-3" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carousel1" role="button" data-slide="next">
+            <span class="carousel-control-next-icon p-3" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
       </div>
-      <div class="col-4 offser-2">
+
+      <div class="col-md-6">
         <h3 class="text-center"><%= @product.name %></h3>
       </div>
-      <div class="">
-      </div>
     </div>
     <hr>
-    <div class="row">
-      <div class="col-8 offset-4">
-        <span class="h3">支払い金額</span>
-        <span class="h3"><%= @product.price %>円</span>
-        <p>depacariポイント:<%= current_user.depacari_point %></p>
-        <p>ポイントを使用</p>
-        <div class="form-group">
-            <%= form.number_field :use_depacari_point, class: 'form-control', value: 0,pattern: '0+\.[0-9]*[1-9][0-9]*$', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57', max: "#{current_user.depacari_point}" %>
+
+    <%= form_with(model: @order, local: true, url: confirm_user_product_orders_path) do |form| %>
+      <div class="row">
+        <div class="col-12">
+          <span class="h3">支払い金額</span>
+          <span class="h3"><%= @product.price.to_s(:delimited) %>円</span>
+          <p class='h5 mt-3 mb-3'>使用可能depacariポイント:<%= current_user.depacari_point.to_s(:delimited) %>dp</p>
+
+          <div class="form-group input-group-lg">
+            <% if @product.price <= current_user.depacari_point %>
+              <label for='payment_method'>支払い方法</label>
+              <%= form.select :payment_method, [ ['クレジットカード' ,'credit_card'], ['depacariポイントで購入' ,'depacari_point'] ], { include_blank: '---' }, id: 'payment_method', class: 'form-control', required:true %>
+            <% else %>
+              <label for='payment_method'>支払い方法</label>
+              <%= form.select :payment_method, [ ['クレジットカード' ,'credit_card'] ], { include_blank: '---' }, id: 'payment_method', class: 'form-control', required:true %>
+            <% end %>
+          </div>
+
         </div>
       </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-8 offset-4">
-        <div class="form-group">
-            <label for='payment_method'>支払い方法</label>
-            <%= form.select :payment_method, [ 'クレジットカード' ], { include_blank: '---' }, class: 'form-control', required:true %>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group input-group-lg">
+            <label for='number_field'>ポイントを使用</label>
+            <%= form.number_field :use_depacari_point, id: 'output', class: 'form-control', value: 0,pattern: '0+\.[0-9]*[1-9][0-9]*$', onkeypress: 'return event.charCode >= 48 && event.charCode <= 57', max: "#{current_user.depacari_point}" %>
+          </div>
         </div>
       </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-8 offset-4">
-        <span class="h4">配送先</span>
-        <span><%= link_to "変更する", user_profiles_edit_address_path %></span>
+      <hr>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <span class="h4">配送先</span>
+          <span><%= link_to "変更する", user_profiles_edit_address_path %></span>
 
-        <% if current_user.address %>
-          <p>住所：<%= current_user.address %></p>
+          <% if current_user.address %>
+            <p class='pt-3 h5'>住所：<%= current_user.address %></p>
+            <% else %>
+            <p class='h5'>住所を登録してください</p>
+          <% end %>
+
+          <% if current_user.name %>
+            <p class='h5'>氏名：<%= current_user.name %></p>
+            <% else %>
+            <p class='h5'>氏名を登録してください</p>
+          <% end %>
+
+          <% if current_user.address && current_user.name %>
+            <div class="form-group input-group-lg">
+              <%= form.submit '購入する', class: 'btn btn-danger form-control mt-2' %>
+            </div>
           <% else %>
-          <p>住所を登録してください</p>
-        <% end %>
-
-        <% if current_user.name %>
-          <p>氏名：<%= current_user.name %></p>
-          <% else %>
-          <p>氏名を登録してください</p>
-        <% end %>
-
-        <%= form.hidden_field :product_id, value: @product.id %>
-        <%= form.submit "購入する", class: 'btn btn-primary' %>
-        
-        <article>
-          <% if flash[:error].present? %>
-            <div id="error_explanation">
-              <p><%= flash[:error] %></p>
+            <div class="form-group input-group-lg">
+              <%= link_to "配送先を登録する", user_profiles_edit_address_path(product_id: @product.id), class: 'btn btn-success form-control mt-2' %>
             </div>
           <% end %>
-          <label class="amount">
-            <span>支払い合計: <%= @product.price %></span>
-          </label>
-        </article>
-        
-      </div>
+        </div>
+      <% end %>
+
+
     </div>
   </div>
+</div>
 
-<% end %>
+
+<script>
+  function selectboxChange() {
+    target = document.getElementById("output");
+
+    select_num = document.getElementById("payment_method").selectedIndex;
+    console.log(select_num);
+    if (select_num == 2) {
+      target.value = <%= @product.price %>
+      target.readOnly = true
+    } else {
+      target.readOnly = false
+    }
+
+  }
+
+        
+  var select_box = document.getElementById("payment_method");
+  select_box.onchange = function() {
+    selectboxChange();
+  }
+
+</script>

@@ -7,6 +7,10 @@ class User::OrdersController < ApplicationController
     @order = Order.new
   end
 
+  def reload_confirm
+    redirect_to action: :new
+  end
+
   def confirm
     @order = Order.new(order_params)
     # depacariポイントが入力されなかった場合0pointにする
@@ -42,7 +46,7 @@ class User::OrdersController < ApplicationController
     else
       @images = @product.product_images
       # logger.info @order.errors.inspect
-      render new_user_product_orders_path
+      redirect_to new_user_product_orders_path
     end
   end
 

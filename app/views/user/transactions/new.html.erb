@@ -1,0 +1,39 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="row">
+
+        <div class="col-12 mb-3">
+          <h3 class="text-center">評価ページ</h3>
+          <hr>
+          <p class="text-center h5">取引状況：<%= @order.status_i18n %></p>
+          <hr>
+        </div>
+
+        <div class="col-12 text-center h5">
+
+        <% if current_user.id == @product.user_id %>
+          <% if @order.status == 'received' %>
+            <p class='h4 mb-4'>受け取り評価が完了するまでお待ちください</p>
+          <% elsif @order.status == 'bought_user_evaluated' %>
+            <p>評価をしてください</p>
+            <%= render 'shared/evaluation' %>
+          <% end %>
+        <% end %>
+
+        <% if current_user.id == @order.user_id %>
+          <% if @order.status == 'received' %>
+            <p>受け取り評価をしてください</p>
+            <%= render 'shared/evaluation' %>
+          <% elsif @order.status == 'bought_user_evaluated' %>
+            <p class='h4 mb-4'>出品者の評価が完了するまでお待ちください</p>
+          <% end %>
+        <% end %>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

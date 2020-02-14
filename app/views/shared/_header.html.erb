@@ -1,53 +1,82 @@
 <header>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-auto">
-        <!-- <%= image_tag 'depacari.png', alt: 'depacari logo', width: '50' %>
-        <%= link_to 'depacari', users_path, class:'navbar-brand' %> -->
+      <div class="col-md-10 offset-md-1">
+        <div class="row">
+          <div class="col-3 col-md-3">
+            <%= link_to products_path, class:'navbar-brand mt-2' do %>
+              <%= image_tag 'depacari.png', alt: 'depacari logo', width: '50' %>
+              <span class="h4 text-dark">depacari</span>
+            <% end %>
+          </div>
 
-        <%= link_to products_path, class:'navbar-brand' do %>
-          <%= image_tag 'depacari.png', alt: 'depacari logo', width: '50' %>
-          depacari
+          <%# スマホ・タブレット画面 %>
+          <% if logged_in? %>
+
+              <div class="col-9 d-md-none text-right pt-3">
+                <%= link_to user_products_path, class: 'text-dark h2 mr-2' do %>
+                  <i class="far fa-eye"></i>
+                <% end %>
+                <%= link_to user_path(current_user), class: 'text-dark h2 mr-2' do %>
+                  <i class="fas fa-user-circle"></i>
+                <% end %>
+              </div>
+
+          <% else %>
+            <div class="col-9 p-0 pr-3 mt-4 d-md-none text-right">
+              <%= link_to '新規会員登録', '/users/new', class: 'p-2 bg-danger text-light rounded' %>
+              <%= link_to 'ログイン', '/login', class: 'p-2 border border-primary text-primary rounded' %>
+            </div>
+          <% end %>
+          <%# /スマホ・タブレット画面 %>
+
+
+          <div class="col-12 col-md-9 mt-2">
+            <%= form_with model: @user, html: {class: 'form-inline w-100 input-group-lg'} do |form| %>
+              <%= form.text_field :search, class: 'form-control w-85', placeholder:"現在使用できません" %>
+              <%= button_tag type: "submit", class: "form-control btn btn-primary btn-s-md w-15" do %>
+                <i class="fa fa-search"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+
+        <%# パソコン画面 %>
+        <% if logged_in? %>
+        <%# ログインしていたら %>
+          <div class="d-none d-md-block float-right">
+            <div class="row">
+              <div class="col-auto">
+                <%= link_to user_products_path, class: 'text-dark h5' do %>
+                  <i class="far fa-eye"></i>
+                  <span>出品中の商品</span>
+                <% end %>
+              </div>
+              <div class="col-auto">
+                <%= link_to user_path(current_user), class: 'text-dark h5' do %>
+                  <i class="fas fa-user-circle"></i>
+                  <span>マイページ</span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% else %>
+        <%# ログインしていなかったら %>
+          <div class="row float-right m-0 d-none d-md-block">
+            <div class="col-auto p-0 mt-2">
+              <%= link_to '新規会員登録', '/users/new', class: 'p-2 bg-danger text-light rounded' %>
+              <%= link_to 'ログイン', '/login', class: 'p-2 border border-primary text-primary rounded' %>
+            </div>
+          </div>
         <% end %>
-      </div>
-      <div class="col-auto">
-        <%= form_with model: @user, html: {class: 'form-inline'} do |form| %>
-          <%= form.text_field :search, class: 'form-control' %>
-          <%= form.submit "search", class: 'btn btn-primary' %>
-        <% end %>
+        <%# /パソコン画面 %>
+
+
       </div>
     </div>
+  </div>
 
-    <% if logged_in? %>
-    <%# ログインしていたら %>
-      <div class="row">
-        <div class="col-auto">
-          <%= link_to "出品する", new_user_product_path %>
-        </div>
-        <div class="col-auto">
-          <%= link_to "自分の出品している製品", user_products_path %>
-        </div>
-        <div class="col-auto">
-          <%= link_to "マイページ", 	user_path(current_user) %>
-        </div>
-        <div class="col-auto">
-          <%= link_to "マイページ更新", edit_user_profiles_path %>
-        </div>
-        <div class="col-auto">
-          <%= link_to "ログアウト", logout_path, method: :delete %>
-        </div>
-      </div>
-    <% else %>
-    <%# ログインしていなかったら %>
-      <div class="row">
-        <div class="col-auto">
-          <%= link_to '新規登録', '/users/new' %>
-        </div>
-        <div class="col-auto">
-          <%= link_to 'ログイン', '/login' %>
-        </div>
-      </div>
-    <% end %>
+  <hr>
 
-  </div>  
 </header>

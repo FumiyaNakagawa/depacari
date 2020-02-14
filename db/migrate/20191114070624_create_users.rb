@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :name
       t.string :address
-      t.integer :evaluation_point
+      t.integer :evaluation_point, default: 0
 
       t.timestamps
     end

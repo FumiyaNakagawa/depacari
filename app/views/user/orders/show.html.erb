@@ -1,2 +1,14 @@
-<h1>購入が完了しました</h1>
-<%= @order.user_id %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <h3 class="text-center">購入が完了しました</h3>
+          <%= link_to transaction_user_product_transaction_path(product_id: @product.id), class: 'btn btn-success w-100 p-3 mt-3' do %>
+            <span class='h4'>取引画面へ進む</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

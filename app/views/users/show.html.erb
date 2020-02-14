@@ -1,14 +1,17 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
-      <h4 class="text-center m-4">My profile</h4>
+    <div class="col-md-3 text-center">
+        <% if current_user?(@user) %>
+        <ul class="">
+            <li class="active nav-link"><a href="">プロフィール</a></li>
+            <li class="nav-link"><%= link_to "プロフィール変更", edit_user_profiles_path %></li>
+            <li class="nav-link"><%= link_to "パスワードの変更", user_profiles_edit_password_path %></li>
+            <li class="nav-link"><%= link_to "ログアウト", logout_path, method: :delete %></li>
+        </ul>
+        <% end %>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-2">
-    <%# 調整 %>
-    </div>
-    <div class="col-8 text-center">
+    
+    <div class="col-md-6 text-center">
       <p>
         <strong>user_name:</strong>
         <%= @user.user_name %>
@@ -17,36 +20,36 @@
         <strong>introduction:</strong>
         <%= @user.introduction %>
       </p>
+
       <% if current_user?(@user) %>
-      <p>
-        <strong>email:</strong>
-        <%= @user.email %>
-      </p>
-      <p>
-        <strong>phone_number:</strong>
-        <%= @user.phone_number %>
-      </p>
-      <p>
-        <strong>name:</strong>
-        <%= @user.name %>
-      </p>
-      <p>
-        <strong>address:</strong>
-        <%= @user.address %>
-      </p>
-      <p>
-        <strong>evaluation_point:</strong>
-        <%= @user.evaluation_point %>
-      </p>
-      <p>
-        <strong>depacari_point:</strong>
-        <%= @user.depacari_point %>
-      </p>
-      <%= link_to "マイページ更新", edit_user_profiles_path %>
-    </div>
-    <% end %>
-    <div class="col-2">
-    <%# 調整 %>
+        <p>
+          <strong>email:</strong>
+          <%= @user.email %>
+        </p>
+        <p>
+          <strong>phone_number:</strong>
+          <%= @user.phone_number %>
+        </p>
+        <p>
+          <strong>name:</strong>
+          <%= @user.name %>
+        </p>
+        <p>
+          <strong>address:</strong>
+          <%= @user.address %>
+        </p>
+        <p>
+          <strong>evaluation_point:</strong>
+          <%= @user.evaluation_point %>
+        </p>
+        <p>
+          <strong>depacari_point:</strong>
+          <%= @user.depacari_point.to_s(:delimited) %>
+        </p>
+      <% end %>
     </div>
   </div>
 </div>
+
+<%# 出品ボタン %>
+<%= render 'shared/sell_button' %>

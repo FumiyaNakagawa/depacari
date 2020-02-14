@@ -7,7 +7,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.integer :product_id, comment: 'productのid'
       t.string :shipping_name, comment: 'お届け先氏名'
       t.string :shipping_address, comment: 'お届け先住所'
-      t.string :payment_method, comment: '決済方法'
+      t.integer :payment_method, comment: '決済方法'
       t.integer :sold_user_id, comment: '売った人のid'
       t.string :product_name, comment: '製品名'
       t.integer :product_price, comment: '製品の値段'
